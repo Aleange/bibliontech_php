@@ -1,0 +1,261 @@
+.search-bar {
+  display: flex;
+  align-items: center;
+  background-color: #00000015;
+  border-radius: 15px;
+  border: none;
+  position: sticky;
+}
+
+.search-bar .form-control {
+  background-color: transparent;
+  margin: 0;
+}
+
+.search-bar a i {
+  margin: 10px 15px 10px 10px;
+}
+
+.books-container {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  align-content: center;
+  padding: 20px 0;
+  margin: 20px 0;
+  z-index: 1;
+}
+
+.sold .book-info .book-price {
+  color: green;
+}
+
+.sold:hover .sold-details {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  opacity: 1;
+}
+
+.sold:hover .book-img {
+  -webkit-filter: blur(8px);
+  filter: blur(8px);
+  opacity: 0.25;
+}
+
+.sold-details {
+  top: 5px;
+  height: 260px;
+  width: 100%;
+  position: absolute;
+  padding: 10px;
+  transition: ease all .3s;
+  opacity: 0;
+  display: none;
+}
+
+.sold-details a {
+  font-size: 16px;
+  font-weight: bold;
+}
+
+.book {
+  position: relative;
+  display: flex;
+  flex-wrap: wrap;
+  width: 200px;
+  margin: 10px;
+  padding: 12px;
+  border-radius: 20px;
+  box-sizing: border-box;
+  justify-content: center;
+  transition: ease all 0.3s;
+}
+
+.book .btn-close {
+  visibility: hidden;
+}
+
+.book:hover .btn-close {
+  visibility: visible;
+}
+
+.prod-box {
+  margin: 30px;
+  min-height: 300px;
+  max-width: 500px;
+  display: flex;
+  align-items: center;
+}
+
+.carousel {
+  width: 250px;
+  height: 350px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
+}
+
+.carousel img {
+  width: 250px;
+  height: 350px;
+  object-fit:cover;
+}
+
+.book-img {
+  display: flex;
+  justify-content: center;
+  opacity: 1;
+  transition: ease all 0.3s;
+}
+
+.book-img a {
+  height: 250px;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
+
+.book-img a img, .book-img img {
+  width: auto;
+  height: auto;
+  max-width: 100%;
+  max-height: 100%;
+}
+
+.book:hover {
+  box-shadow: 0 14px 28px rgba(0, 0, 0, 0.1), 0 10px 10px rgba(0, 0, 0, 0.1);
+  transform: scale(1.05);
+}
+
+.book-info {
+  text-align: center;
+  padding: 10px;
+  min-height: 130px;
+  white-space: normal;
+}
+
+.book-title {
+  font-size: 16px;
+  white-space: normal;
+  font-weight: bold;
+  min-height: 50px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  line-clamp: 2;
+  -webkit-box-orient: vertical;
+}
+
+.bookP-title {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  line-clamp: 2;
+  -webkit-box-orient: vertical;
+}
+
+.book-author {
+  font-size: 12px;
+  min-height: 40px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  line-clamp: 2;
+  -webkit-box-orient: vertical;
+}
+
+.bookP-author, .bookP-seller {
+  font-size: 12px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: 1;
+  line-clamp: 1;
+  -webkit-box-orient: vertical;
+  margin: 10px 0;
+}
+
+.book-author a, .book-seller a, .bookP-author a, .bookP-seller a {
+  font-weight: bold;
+}
+
+.bookP-desc {
+  margin: 20px 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: 10;
+  line-clamp: 10;
+  -webkit-box-orient: vertical;
+}
+
+.book-price {
+  color: #005bbf;
+  font-size: 18px;
+  font-weight: bold;
+  height: 100%;
+}
+
+.add-book {
+  position: fixed;
+  display: none;
+  align-items: center;
+  justify-content: center;
+  background-color: rgba(0, 0, 0, 0.2);
+  backdrop-filter: blur(8px);
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 11;
+  transition: ease all 2s;
+}
+
+.form-book {
+  display: flex;
+  flex-wrap: wrap;
+  width: 200px;
+  margin: 10px;
+  padding: 12px;
+  border-radius: 20px;
+  box-sizing: border-box;
+  justify-content: center;
+}
+
+.page-cnt {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 30px;
+  width: 30px;
+  margin: 0 10px;
+  background-color: #bbbbbb;
+  border: none;
+  border-radius: 50%;
+  opacity: 0.5;
+  transition: ease all .3s;
+  animation: ease all .3s;
+}
+
+.page-cnt:hover, .active-page {
+  color: #F7F9F9;
+  background-color: #0b0a07;
+  opacity: 1;
+  transform: scale(1.05);
+}
+
+.alert-msg {
+  position: absolute;
+  display: block;
+}
+
+#add-book-open, #get-cash-open {
+  margin: 0;
+}

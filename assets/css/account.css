@@ -1,0 +1,76 @@
+.scroll {
+  overflow-x: scroll;
+  overflow-y: hidden;
+  white-space: nowrap;
+  padding: 20px;
+  margin: 20px;
+}
+
+@media screen and (max-width: 575px) {
+  .scroll {
+    width: 250px;
+  }
+}
+
+.scroll > .book {
+  cursor: pointer;
+  display: inline-block;
+  vertical-align: top;
+}
+
+.reviews-container {
+  margin: 30px 0;
+}
+
+.review {
+  position: relative;
+  box-shadow: 0 14px 28px rgba(0, 0, 0, 0.1), 0 10px 10px rgba(0, 0, 0, 0.1);
+  padding: 30px;
+  border-radius: 15px;
+  margin: 30px 10px;
+}
+
+.profile-picture img {
+  width: 100px;
+  margin: 20px;
+  height: 100px;
+  object-fit: cover;
+}
+
+.reviewer-info {
+  display: flex;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.reviewer-info .star-rate {
+  text-align: right;
+}
+
+.reviewer-info img {
+  width: 50px;
+  height: 50px;
+  margin: 0 20px;
+  object-fit: cover;
+}
+
+.reviewer-info h1 {
+  font-size: 20px;
+}
+
+.review-content {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: 5;
+  line-clamp: 5;
+  -webkit-box-orient: vertical;
+  margin: 10px 0;
+}
+
+.section-title {
+  display: flex;
+  align-items: center;
+  text-align: left;
+  padding: 0 20px;
+}

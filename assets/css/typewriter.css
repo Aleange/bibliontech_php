@@ -1,0 +1,58 @@
+.typed-text {
+  font-size: calc(1.5rem + 1.5vw);
+  font-weight: 600;
+  color: #0b0a07e0;
+  margin-top: 0;
+  margin-bottom: 0.5rem;
+  font-weight: 500;
+  line-height: 1.2;
+  letter-spacing: -2px;
+}
+
+.cursor {
+  display: inline-block;
+  background-color: #0b0a07e0;
+  margin-left: 0.1rem;
+  font-size: calc(0.75rem + 1.5vw);
+  width: 3.5px;
+  animation: blink 1s infinite;
+}
+
+.cursor.typing {
+  animation: none;
+}
+
+.btn-tpw {
+  display: inline-block;
+  background-size: 800%;
+  color: rgb(255, 255, 255);
+  text-align: center;
+  font-size: 25px;
+  font-weight: bold;
+  padding: 0.8rem 2.5rem;
+  border-radius: 10rem;
+  margin: 40px;
+}
+
+.btn-tpw:hover {
+  color: rgb(255, 255, 255);
+}
+
+@keyframes blink {
+  0% {
+    background-color: #0b0a07e0;
+  }
+  49% {
+    background-color: #0b0a07e0;
+  }
+  50% {
+    background-color: transparent;
+  }
+  99% {
+    background-color: transparent;
+  }
+  100% {
+    background-color: #0b0a07e0;
+  }
+}
+
