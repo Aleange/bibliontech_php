@@ -1,118 +1,525 @@
 <!DOCTYPE html>
 <html lang="en">
-
-<head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
+  <head>
+    <meta charset="utf-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0, shrink-to-fit=no"
+    />
     <title>BiblionTech</title>
-    <link rel="stylesheet" href="../assets/bootstrap/css/bootstrap.min.css">
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Poppins&amp;display=swap">
-    <link rel="stylesheet" href="../assets/fonts/fontawesome-all.min.css">
-    <link rel="stylesheet" href="../assets/fonts/font-awesome.min.css">
-    <link rel="stylesheet" href="../assets/fonts/fontawesome5-overrides.min.css">
-    <link rel="stylesheet" href="../assets/css/footer.css">
-    <link rel="stylesheet" href="../assets/css/form.css">
-    <link rel="stylesheet" href="../assets/css/home.css">
-    <link rel="stylesheet" href="../assets/css/navbar.css">
-    <link rel="stylesheet" href="../assets/css/styles.css">
-    <link rel="stylesheet" href="../assets/css/typewriter.css">
-    <link rel="stylesheet" href="../assets/css/cookie.css">
-    
-</head>
+    <link rel="stylesheet" href="../assets/bootstrap/css/bootstrap.min.css" />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css?family=Poppins&amp;display=swap"
+    />
+    <link rel="stylesheet" href="../assets/fonts/fontawesome-all.min.css" />
+    <link rel="stylesheet" href="../assets/fonts/font-awesome.min.css" />
+    <link
+      rel="stylesheet"
+      href="../assets/fonts/fontawesome5-overrides.min.css"
+    />
+    <link rel="stylesheet" href="../assets/css/footer.css" />
+    <link rel="stylesheet" href="../assets/css/form.css" />
+    <link rel="stylesheet" href="../assets/css/home.css" />
+    <link rel="stylesheet" href="../assets/css/navbar.css" />
+    <link rel="stylesheet" href="../assets/css/styles.css" />
+    <link rel="stylesheet" href="../assets/css/typewriter.css" />
+    <link rel="stylesheet" href="../assets/css/cookie.css" />
+  </head>
 
-<body>
+  <body>
     <nav class="navbar navbar-light navbar-expand-md py-3">
-        <div class="container"><a class="navbar-brand d-flex align-items-center"
-                href="https://bibliontech.it/"><span>BiblionTech</span></a><button data-bs-toggle="collapse" class="navbar-toggler"
-                data-bs-target="#navcol-1"><span class="navbar-toggler-icon"><svg xmlns="http://www.w3.org/2000/svg"
-                        width="1em" height="1em" viewBox="0 0 24 24" fill="none">
-                        <path
-                            d="M22 18.0048C22 18.5544 21.5544 19 21.0048 19H12.9952C12.4456 19 12 18.5544 12 18.0048C12 17.4552 12.4456 17.0096 12.9952 17.0096H21.0048C21.5544 17.0096 22 17.4552 22 18.0048Z"
-                            fill="currentColor"></path>
-                        <path
-                            d="M22 12.0002C22 12.5499 21.5544 12.9954 21.0048 12.9954H2.99519C2.44556 12.9954 2 12.5499 2 12.0002C2 11.4506 2.44556 11.0051 2.99519 11.0051H21.0048C21.5544 11.0051 22 11.4506 22 12.0002Z"
-                            fill="currentColor"></path>
-                        <path
-                            d="M21.0048 6.99039C21.5544 6.99039 22 6.54482 22 5.99519C22 5.44556 21.5544 5 21.0048 5H8.99519C8.44556 5 8 5.44556 8 5.99519C8 6.54482 8.44556 6.99039 8.99519 6.99039H21.0048Z"
-                            fill="currentColor"></path>
-                    </svg></span></button>
-            <div class="collapse navbar-collapse" id="navcol-1">
-                <ul class="navbar-nav me-auto">
-                    <li class="nav-item"><a class="nav-link" href="https://bibliontech.it/acquista/">Home</a></li>
-                    <li class="nav-item"><a class="nav-link active" href="https://bibliontech.it/services/">Come funziona</a></li>
-                </ul><button class="btn nav-btn click" type="button" id="goToLogin"><i
-                        class="far fa-user"></i></button>
-            </div>
+      <div class="container">
+        <a
+          class="navbar-brand d-flex align-items-center"
+          href="https://bibliontech.it/"
+          ><span>BiblionTech</span></a
+        ><button
+          data-bs-toggle="collapse"
+          class="navbar-toggler"
+          data-bs-target="#navcol-1"
+        >
+          <span class="navbar-toggler-icon"
+            ><svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="1em"
+              height="1em"
+              viewBox="0 0 24 24"
+              fill="none"
+            >
+              <path
+                d="M22 18.0048C22 18.5544 21.5544 19 21.0048 19H12.9952C12.4456 19 12 18.5544 12 18.0048C12 17.4552 12.4456 17.0096 12.9952 17.0096H21.0048C21.5544 17.0096 22 17.4552 22 18.0048Z"
+                fill="currentColor"
+              ></path>
+              <path
+                d="M22 12.0002C22 12.5499 21.5544 12.9954 21.0048 12.9954H2.99519C2.44556 12.9954 2 12.5499 2 12.0002C2 11.4506 2.44556 11.0051 2.99519 11.0051H21.0048C21.5544 11.0051 22 11.4506 22 12.0002Z"
+                fill="currentColor"
+              ></path>
+              <path
+                d="M21.0048 6.99039C21.5544 6.99039 22 6.54482 22 5.99519C22 5.44556 21.5544 5 21.0048 5H8.99519C8.44556 5 8 5.44556 8 5.99519C8 6.54482 8.44556 6.99039 8.99519 6.99039H21.0048Z"
+                fill="currentColor"
+              ></path></svg
+          ></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navcol-1">
+          <ul class="navbar-nav me-auto">
+            <li class="nav-item">
+              <a class="nav-link" href="https://bibliontech.it/acquista/"
+                >Home</a
+              >
+            </li>
+            <li class="nav-item">
+              <a class="nav-link active" href="https://bibliontech.it/services/"
+                >Come funziona</a
+              >
+            </li>
+          </ul>
+          <button class="btn nav-btn click" type="button" id="goToLogin">
+            <i class="far fa-user"></i>
+          </button>
         </div>
+      </div>
     </nav>
     <section>
-        <div class="container type-container">
-            <div class="row">
-                <div class="col text-start">
-                    <div class="text-container">
-                        <h1>Informativa sulla privacy di Bibliontech.it<br></h1><span><br>Titolare del Trattamento dei Dati Alessandro Angeleri Indirizzo email del Titolare: info@bibliontech.it<br></span>
-                    </div>
-                    <div class="text-container">
-                        <h2>Tipologie di Dati raccolti<br></h2><span><br>Fra i Dati Personali raccolti da questa Applicazione, in modo autonomo o tramite terze parti, ci sono: cognome; CAP; nome; data di nascita; email; username; password; indirizzo di fatturazione; varie tipologie di Dati; informazioni di pagamento.<br>Dettagli completi su ciascuna tipologia di dati raccolti sono forniti nelle sezioni dedicate di questa privacy policy o mediante specifici testi informativi visualizzati prima della raccolta dei dati stessi. I Dati Personali possono essere liberamente forniti dall'Utente o, nel caso di Dati di Utilizzo, raccolti automaticamente durante l'uso di questa Applicazione. Se non diversamente specificato, tutti i Dati richiesti da questa Applicazione sono obbligatori. Se l’Utente rifiuta di comunicarli, potrebbe essere impossibile per questa Applicazione fornire il Servizio. Nei casi in cui questa Applicazione indichi alcuni Dati come facoltativi, gli Utenti sono liberi di astenersi dal comunicare tali Dati, senza che ciò abbia alcuna conseguenza sulla disponibilità del Servizio o sulla sua operatività. Gli Utenti che dovessero avere dubbi su quali Dati siano obbligatori, sono incoraggiati a contattare il Titolare. L’eventuale utilizzo di Cookie - o di altri strumenti di tracciamento - da parte di questa Applicazione o dei titolari dei servizi terzi utilizzati da questa Applicazione, ove non diversamente precisato, ha la finalità di fornire il Servizio richiesto dall'Utente, oltre alle ulteriori finalità descritte nel presente documento e nella Cookie Policy, se disponibile.<br>L'Utente si assume la responsabilità dei Dati Personali di terzi ottenuti, pubblicati o condivisi mediante questa Applicazione e garantisce di avere il diritto di comunicarli o diffonderli, liberando il Titolare da qualsiasi responsabilità verso terzi.<br></span>
-                    </div>
-                    <div class="text-container">
-                        <h2>Modalità e luogo del trattamento dei Dati raccolti<br></h2><span><br><strong>Modalità di trattamento</strong><br>Il Titolare adotta le opportune misure di sicurezza volte ad impedire l’accesso, la divulgazione, la modifica o la distruzione non autorizzate dei Dati Personali. Il trattamento viene effettuato mediante strumenti informatici e/o telematici, con modalità organizzative e con logiche strettamente correlate alle finalità indicate. Oltre al Titolare, in alcuni casi, potrebbero avere accesso ai Dati altri soggetti coinvolti nell’organizzazione di questa Applicazione (personale amministrativo, commerciale, marketing, legali, amministratori di sistema) ovvero soggetti esterni (come fornitori di servizi tecnici terzi, corrieri postali, hosting provider, società informatiche, agenzie di comunicazione) nominati anche, se necessario, Responsabili del Trattamento da parte del Titolare. L’elenco aggiornato dei Responsabili potrà sempre essere richiesto al Titolare del Trattamento.<br><br><strong>Base giuridica del trattamento</strong><br>Il Titolare tratta Dati Personali relativi all’Utente in caso sussista una delle seguenti condizioni:<br>l’Utente ha prestato il consenso per una o più finalità specifiche; Nota: in alcuni ordinamenti il Titolare può essere autorizzato a trattare Dati Personali senza che debba sussistere il consenso dell’Utente o un’altra delle basi giuridiche specificate di seguito, fino a quando l’Utente non si opponga (“opt-out”) a tale trattamento. Ciò non è tuttavia applicabile qualora il trattamento di Dati Personali sia regolato dalla legislazione europea in materia di protezione dei Dati Personali;<br>il trattamento è necessario all'esecuzione di un contratto con l’Utente e/o all'esecuzione di misure precontrattuali;<br>il trattamento è necessario per adempiere un obbligo legale al quale è soggetto il Titolare;<br>il trattamento è necessario per l'esecuzione di un compito di interesse pubblico o per l'esercizio di pubblici poteri di cui è investito il Titolare;<br>il trattamento è necessario per il perseguimento del legittimo interesse del Titolare o di terzi.<br>È comunque sempre possibile richiedere al Titolare di chiarire la concreta base giuridica di ciascun trattamento ed in particolare di specificare se il trattamento sia basato sulla legge, previsto da un contratto o necessario per concludere un contratto.<br><br><strong>Luogo</strong><br>I Dati sono trattati presso le sedi operative del Titolare ed in ogni altro luogo in cui le parti coinvolte nel trattamento siano localizzate. Per ulteriori informazioni, contatta il Titolare. I Dati Personali dell’Utente potrebbero essere trasferiti in un paese diverso da quello in cui l’Utente si trova. Per ottenere ulteriori informazioni sul luogo del trattamento l’Utente può fare riferimento alla sezione relativa ai dettagli sul trattamento dei Dati Personali.L’Utente ha diritto a ottenere informazioni in merito alla base giuridica del trasferimento di Dati al di fuori dell’Unione Europea o ad un’organizzazione internazionale di diritto internazionale pubblico o costituita da due o più paesi, come ad esempio l’ONU, nonché in merito alle misure di sicurezza adottate dal Titolare per proteggere i Dati.L’Utente può verificare se abbia luogo uno dei trasferimenti appena descritti esaminando la sezione di questo documento relativa ai dettagli sul trattamento di Dati Personali o chiedere informazioni al Titolare contattandolo agli estremi riportati in apertura.<br><br><strong>Periodo di conservazione</strong>I Dati sono trattati e conservati per il tempo richiesto dalle finalità per le quali sono stati raccolti.<br>Pertanto:<br>I Dati Personali raccolti per scopi collegati all’esecuzione di un contratto tra il Titolare e l’Utente saranno trattenuti sino a quando sia completata l’esecuzione di tale contratto. I Dati Personali raccolti per finalità riconducibili all’interesse legittimo del Titolare saranno trattenuti sino al soddisfacimento di tale interesse. L’Utente può ottenere ulteriori informazioni in merito all’interesse legittimo perseguito dal Titolare nelle relative sezioni di questo documento o contattando il Titolare.<br>Quando il trattamento è basato sul consenso dell’Utente, il Titolare può conservare i Dati Personali più a lungo sino a quando detto consenso non venga revocato. Inoltre, il Titolare potrebbe essere obbligato a conservare i Dati Personali per un periodo più lungo in ottemperanza ad un obbligo di legge o per ordine di un’autorità.<br>Al termine del periodo di conservazione i Dati Personali saranno cancellati. Pertanto, allo spirare di tale termine il diritto di accesso, cancellazione, rettificazione ed il diritto alla portabilità dei Dati non potranno più essere esercitati.<br></span>
-                    </div>
-                    <div class="text-container">
-                        <h2>Finalità del trattamento dei dati raccolti<br></h2><span><br>I Dati dell’Utente sono raccolti per consentire al Titolare di fornire il Servizio, adempiere agli obblighi di legge, rispondere a richieste o azioni esecutive, tutelare i propri diritti ed interessi (o quelli di Utenti o di terze parti), individuare eventuali attività dolose o fraudolente, nonché per le seguenti finalità: Registrazione ed autenticazione fornite direttamente da questa Applicazione, Contattare l'Utente e Gestione dei pagamenti. Per ottenere informazioni dettagliate sulle finalità del trattamento e sui Dati Personali trattati per ciascuna finalità, l’Utente può fare riferimento alla sezione “Dettagli sul trattamento dei Dati Personali”.<br></span>
-                    </div>
-                    <div class="text-container">
-                        <h2>Dettagli sul trattamento dei Dati Personali<br></h2><span><br>I Dati Personali sono raccolti per le seguenti finalità ed utilizzando i seguenti servizi:<br><br><strong>Contattare l'utente</strong><br>Mailing list o newsletter - con la registrazione alla mailing list o alla newsletter, l’indirizzo email dell’Utente viene automaticamente inserito in una lista di contatti a cui potranno essere trasmessi messaggi email contenenti informazioni, anche di natura commerciale e promozionale, relative a questa Applicazione. L'indirizzo email dell'Utente potrebbe anche essere aggiunto a questa lista come risultato della registrazione a questa Applicazione o dopo aver effettuato un acquisto. Dati Personali trattati: email.<br>Modulo di contatto - l’Utente, compilando con i propri Dati il modulo di contatto, acconsente al loro utilizzo per rispondere alle richieste di informazioni, di preventivo, o di qualunque altra natura indicata dall’intestazione del modulo. Dati Personali trattati: cognome; email; nome.<br><br><strong>Registrazione ed autenticazione fornite direttamente da questa Applicazione</strong><br>Con la registrazione o l’autenticazione l’Utente consente a questa Applicazione di identificarlo e di dargli accesso a servizi dedicati. I Dati Personali sono raccolti e conservati esclusivamente a scopo di registrazione o di identificazione. I Dati raccolti sono solo quelli necessari a fornire il servizio richiesto dall’Utente.<br>Registrazione diretta - L’Utente si registra compilando il modulo di registrazione e fornendo direttamente a questa Applicazione i propri Dati Personali. Dati Personali trattati: CAP; cognome; data di nascita; email; indirizzo di fatturazione; nome; password; username; varie tipologie di Dati.<br><br><strong>Gestione dei pagamenti</strong><br>Se non diversamente specificato, questa Applicazione elabora tutti i pagamenti con carta di credito, bonifico bancario o altri mezzi tramite fornitori esterni di servizi di pagamento. In generale, e salvo diversa indicazione, gli Utenti sono pregati di fornire i dettagli di pagamento e le informazioni personali direttamente a tali fornitori di servizi di pagamento. Questa Applicazione non è coinvolta nella raccolta e nell'elaborazione di tali informazioni: riceverà invece solo una notifica da parte del fornitore di servizi di pagamento in questione circa l'avvenuto pagamento.<br>Stripe è un servizio di pagamento fornito da Stripe Inc, Stripe Technology Europe Ltd oppure da Stripe Payments Ltd, a seconda della posizione in cui questa Applicazione viene utilizzata. Dati Personali trattati: cognome; email; indirizzo di fatturazione; informazioni di pagamento; nome. Luogo del trattamento: Stati Uniti; Irlanda; Regno Unito.<br>Pagamento a mezzo di bonifico - Nel caso di ricezione di denaro il metodo scelto sarà il bonifico bancario diretto sul conto corrente inserito in fase di registrazione e i dati raccolti saranno codice IBAN. Tali dati saranno raccolti e trattati esclusivamente nell'ambito della transazione ed ai soli fini della fatturazione. Dati Personali trattati: informazioni di pagamento.<br></span>
-                    </div>
-                    <div class="text-container">
-                        <h2>Ulteriori informazioni sul trattamento dei Dati Personali<br></h2><span><br><strong>Vendita di beni e servizi online</strong><br>I Dati Personali raccolti sono utilizzati per l’erogazione di servizi all’Utente o per la vendita di prodotti, inclusi il pagamento e l’eventuale consegna. I Dati Personali raccolti per perfezionare il pagamento possono essere quelli relativi alla carta di credito, al conto corrente utilizzato per il bonifico o ad altri strumenti di pagamento previsti. I Dati di pagamento raccolti da questa Applicazione dipendono dal sistema di pagamento utilizzato.<br></span>
-                    </div>
-                    <div class="text-container">
-                        <h2>Diritti dell'utente<br></h2><span><br>Gli Utenti possono esercitare determinati diritti con riferimento ai Dati trattati dal Titolare. In particolare, l’Utente ha il diritto di:<br>revocare il consenso in ogni momento. L’Utente può revocare il consenso al trattamento dei propri Dati Personali precedentemente espresso. Opporsi al trattamento dei propri Dati. L’Utente può opporsi al trattamento dei propri Dati quando esso avviene su una base giuridica diversa dal consenso. Ulteriori dettagli sul diritto di opposizione sono indicati nella sezione sottostante accedere ai propri Dati. L’Utente ha diritto ad ottenere informazioni sui Dati trattati dal Titolare, su determinati aspetti del trattamento ed a ricevere una copia dei Dati trattati. Verificare e chiedere la rettificazione. L’Utente può verificare la correttezza dei propri Dati e richiederne l’aggiornamento o la correzione. Ottenere la limitazione del trattamento. Quando ricorrono determinate condizioni, l’Utente può richiedere la limitazione del trattamento dei propri Dati. In tal caso il Titolare non tratterà i Dati per alcun altro scopo se non la loro conservazione. Ottenere la cancellazione o rimozione dei propri Dati Personali. Quando ricorrono determinate condizioni, l’Utente può richiedere la cancellazione dei propri Dati da parte del Titolare. Ricevere i propri Dati o farli trasferire ad altro titolare. L’Utente ha diritto di ricevere i propri Dati in formato strutturato, di uso comune e leggibile da dispositivo automatico e, ove tecnicamente fattibile, di ottenerne il trasferimento senza ostacoli ad un altro titolare. Questa disposizione è applicabile quando i Dati sono trattati con strumenti automatizzati ed il trattamento è basato sul consenso dell’Utente, su un contratto di cui l’Utente è parte o su misure contrattuali ad esso connesse proporre reclamo. L’Utente può proporre un reclamo all’autorità di controllo della protezione dei dati personali competente o agire in sede giudiziale.<br><br><strong>Dettagli sul diritto d'opposizione</strong><br>Quando i Dati Personali sono trattati nell’interesse pubblico, nell’esercizio di pubblici poteri di cui è investito il Titolare oppure per perseguire un interesse legittimo del Titolare, gli Utenti hanno diritto ad opporsi al trattamento per motivi connessi alla loro situazione particolare. Si fa presente agli Utenti che, ove i loro Dati fossero trattati con finalità di marketing diretto, possono opporsi al trattamento senza fornire alcuna motivazione. Per scoprire se il Titolare tratti dati con finalità di marketing diretto gli Utenti possono fare riferimento alle rispettive sezioni di questo documento.<br><br><strong>Come esercitare i diritti</strong><br>Per esercitare i diritti dell’Utente, gli Utenti possono indirizzare una richiesta agli estremi di contatto del Titolare indicati in questo documento. Le richieste sono depositate a titolo gratuito e evase dal Titolare nel più breve tempo possibile, in ogni caso entro un mese.<br><br><strong>Cookie policy</strong><br>Questa Applicazione fa utilizzo di Strumenti di Tracciamento. Per saperne di più, l’Utente può consultare la Cookie Policy.<br><br><strong>Ulteriori informazioni sul trattamento</strong><br>Difesa in giudizio I Dati Personali dell’Utente possono essere utilizzati da parte del Titolare in giudizio o nelle fasi preparatorie alla sua eventuale instaurazione per la difesa da abusi nell'utilizzo di questa Applicazione o dei Servizi connessi da parte dell’Utente. L’Utente dichiara di essere consapevole che il Titolare potrebbe essere obbligato a rivelare i Dati per ordine delle autorità pubbliche. Informative specifiche Su richiesta dell’Utente, in aggiunta alle informazioni contenute in questa privacy policy, questa Applicazione potrebbe fornire all'Utente delle informative aggiuntive e contestuali riguardanti Servizi specifici, o la raccolta ed il trattamento di Dati Personali. Log di sistema e manutenzione Per necessità legate al funzionamento ed alla manutenzione, questa Applicazione e gli eventuali servizi terzi da essa utilizzati potrebbero raccogliere log di sistema, ossia file che registrano le interazioni e che possono contenere anche Dati Personali, quali l’indirizzo IP Utente. Informazioni non contenute in questa policy Ulteriori informazioni in relazione al trattamento dei Dati Personali potranno essere richieste in qualsiasi momento al Titolare del Trattamento utilizzando gli estremi di contatto. Risposta alle richieste “Do Not Track” Questa Applicazione non supporta le richieste “Do Not Track”. Per scoprire se gli eventuali servizi di terze parti utilizzati le supportino, l'Utente è invitato a consultare le rispettive privacy policy. Modifiche a questa privacy policy Il Titolare del Trattamento si riserva il diritto di apportare modifiche alla presente privacy policy in qualunque momento notificandolo agli Utenti su questa pagina e, se possibile, su questa Applicazione nonché, qualora tecnicamente e legalmente fattibile, inviando una notifica agli Utenti attraverso uno degli estremi di contatto di cui è in possesso. Si prega dunque di consultare con frequenza questa pagina, facendo riferimento alla data di ultima modifica indicata in fondo. Qualora le modifiche interessino trattamenti la cui base giuridica è il consenso, il Titolare provvederà a raccogliere nuovamente il consenso dell’Utente, se necessario.<br><br><strong>Definizioni</strong><br>Dati Personali (o Dati) Costituisce dato personale qualunque informazione che, direttamente o indirettamente, anche in collegamento con qualsiasi altra informazione, ivi compreso un numero di identificazione personale, renda identificata o identificabile una persona fisica. Dati di Utilizzo Sono le informazioni raccolte automaticamente attraverso questa Applicazione (anche da applicazioni di parti terze integrate in questa Applicazione), tra cui: gli indirizzi IP o i nomi a dominio dei computer utilizzati dall’Utente che si connette con questa Applicazione, gli indirizzi in notazione URI (Uniform Resource Identifier), l’orario della richiesta, il metodo utilizzato nell’inoltrare la richiesta al server, la dimensione del file ottenuto in risposta, il codice numerico indicante lo stato della risposta dal server (buon fine, errore, ecc.) il paese di provenienza, le caratteristiche del browser e del sistema operativo utilizzati dal visitatore, le varie connotazioni temporali della visita (ad esempio il tempo di permanenza su ciascuna pagina) e i dettagli relativi all’itinerario seguito all’interno dell’Applicazione, con particolare riferimento alla sequenza delle pagine consultate, ai parametri relativi al sistema operativo e all’ambiente informatico dell’Utente. Utente L'individuo che utilizza questa Applicazione che, salvo ove diversamente specificato, coincide con l'Interessato. Interessato La persona fisica cui si riferiscono i Dati Personali. Responsabile del Trattamento (o Responsabile) La persona fisica, giuridica, la pubblica amministrazione e qualsiasi altro ente che tratta dati personali per conto del Titolare, secondo quanto esposto nella presente privacy policy. Titolare del Trattamento (o Titolare) La persona fisica o giuridica, l'autorità pubblica, il servizio o altro organismo che, singolarmente o insieme ad altri, determina le finalità e i mezzi del trattamento di dati personali e gli strumenti adottati, ivi comprese le misure di sicurezza relative al funzionamento ed alla fruizione di questa Applicazione. Il Titolare del Trattamento, salvo quanto diversamente specificato, è il titolare di questa Applicazione. Questa Applicazione Lo strumento hardware o software mediante il quale sono raccolti e trattati i Dati Personali degli Utenti. Servizio Il Servizio fornito da questa Applicazione così come definito nei relativi termini (se presenti) su questo sito/applicazione. Unione Europea (o UE) Salvo ove diversamente specificato, ogni riferimento all’Unione Europea contenuto in questo documento si intende esteso a tutti gli attuali stati membri dell’Unione Europea e dello Spazio Economico Europeo. Riferimenti legali La presente informativa privacy è redatta sulla base di molteplici ordinamenti legislativi, inclusi gli artt. 13 e 14 del Regolamento (UE) 2016/679. Ove non diversamente specificato, questa informativa privacy riguarda esclusivamente questa Applicazione.<br></span>
-                    </div>
-                </div>
+      <div class="container type-container">
+        <div class="row">
+          <div class="col text-start">
+            <div class="text-container">
+              <h1>Informativa sulla privacy di Bibliontech.it<br /></h1>
+              <span
+                ><br />Titolare del Trattamento dei Dati Alessandro Angeleri
+                Indirizzo email del Titolare: info@bibliontech.it<br
+              /></span>
             </div>
+            <div class="text-container">
+              <h2>Tipologie di Dati raccolti<br /></h2>
+              <span
+                ><br />Fra i Dati Personali raccolti da questa Applicazione, in
+                modo autonomo o tramite terze parti, ci sono: cognome; CAP;
+                nome; data di nascita; email; username; password; indirizzo di
+                fatturazione; varie tipologie di Dati; informazioni di
+                pagamento.<br />Dettagli completi su ciascuna tipologia di dati
+                raccolti sono forniti nelle sezioni dedicate di questa privacy
+                policy o mediante specifici testi informativi visualizzati prima
+                della raccolta dei dati stessi. I Dati Personali possono essere
+                liberamente forniti dall'Utente o, nel caso di Dati di Utilizzo,
+                raccolti automaticamente durante l'uso di questa Applicazione.
+                Se non diversamente specificato, tutti i Dati richiesti da
+                questa Applicazione sono obbligatori. Se l’Utente rifiuta di
+                comunicarli, potrebbe essere impossibile per questa Applicazione
+                fornire il Servizio. Nei casi in cui questa Applicazione indichi
+                alcuni Dati come facoltativi, gli Utenti sono liberi di
+                astenersi dal comunicare tali Dati, senza che ciò abbia alcuna
+                conseguenza sulla disponibilità del Servizio o sulla sua
+                operatività. Gli Utenti che dovessero avere dubbi su quali Dati
+                siano obbligatori, sono incoraggiati a contattare il Titolare.
+                L’eventuale utilizzo di Cookie - o di altri strumenti di
+                tracciamento - da parte di questa Applicazione o dei titolari
+                dei servizi terzi utilizzati da questa Applicazione, ove non
+                diversamente precisato, ha la finalità di fornire il Servizio
+                richiesto dall'Utente, oltre alle ulteriori finalità descritte
+                nel presente documento e nella Cookie Policy, se disponibile.<br />L'Utente
+                si assume la responsabilità dei Dati Personali di terzi
+                ottenuti, pubblicati o condivisi mediante questa Applicazione e
+                garantisce di avere il diritto di comunicarli o diffonderli,
+                liberando il Titolare da qualsiasi responsabilità verso
+                terzi.<br
+              /></span>
+            </div>
+            <div class="text-container">
+              <h2>Modalità e luogo del trattamento dei Dati raccolti<br /></h2>
+              <span
+                ><br /><strong>Modalità di trattamento</strong><br />Il Titolare
+                adotta le opportune misure di sicurezza volte ad impedire
+                l’accesso, la divulgazione, la modifica o la distruzione non
+                autorizzate dei Dati Personali. Il trattamento viene effettuato
+                mediante strumenti informatici e/o telematici, con modalità
+                organizzative e con logiche strettamente correlate alle finalità
+                indicate. Oltre al Titolare, in alcuni casi, potrebbero avere
+                accesso ai Dati altri soggetti coinvolti nell’organizzazione di
+                questa Applicazione (personale amministrativo, commerciale,
+                marketing, legali, amministratori di sistema) ovvero soggetti
+                esterni (come fornitori di servizi tecnici terzi, corrieri
+                postali, hosting provider, società informatiche, agenzie di
+                comunicazione) nominati anche, se necessario, Responsabili del
+                Trattamento da parte del Titolare. L’elenco aggiornato dei
+                Responsabili potrà sempre essere richiesto al Titolare del
+                Trattamento.<br /><br /><strong
+                  >Base giuridica del trattamento</strong
+                ><br />Il Titolare tratta Dati Personali relativi all’Utente in
+                caso sussista una delle seguenti condizioni:<br />l’Utente ha
+                prestato il consenso per una o più finalità specifiche; Nota: in
+                alcuni ordinamenti il Titolare può essere autorizzato a trattare
+                Dati Personali senza che debba sussistere il consenso
+                dell’Utente o un’altra delle basi giuridiche specificate di
+                seguito, fino a quando l’Utente non si opponga (“opt-out”) a
+                tale trattamento. Ciò non è tuttavia applicabile qualora il
+                trattamento di Dati Personali sia regolato dalla legislazione
+                europea in materia di protezione dei Dati Personali;<br />il
+                trattamento è necessario all'esecuzione di un contratto con
+                l’Utente e/o all'esecuzione di misure precontrattuali;<br />il
+                trattamento è necessario per adempiere un obbligo legale al
+                quale è soggetto il Titolare;<br />il trattamento è necessario
+                per l'esecuzione di un compito di interesse pubblico o per
+                l'esercizio di pubblici poteri di cui è investito il
+                Titolare;<br />il trattamento è necessario per il perseguimento
+                del legittimo interesse del Titolare o di terzi.<br />È comunque
+                sempre possibile richiedere al Titolare di chiarire la concreta
+                base giuridica di ciascun trattamento ed in particolare di
+                specificare se il trattamento sia basato sulla legge, previsto
+                da un contratto o necessario per concludere un contratto.<br /><br /><strong
+                  >Luogo</strong
+                ><br />I Dati sono trattati presso le sedi operative del
+                Titolare ed in ogni altro luogo in cui le parti coinvolte nel
+                trattamento siano localizzate. Per ulteriori informazioni,
+                contatta il Titolare. I Dati Personali dell’Utente potrebbero
+                essere trasferiti in un paese diverso da quello in cui l’Utente
+                si trova. Per ottenere ulteriori informazioni sul luogo del
+                trattamento l’Utente può fare riferimento alla sezione relativa
+                ai dettagli sul trattamento dei Dati Personali.L’Utente ha
+                diritto a ottenere informazioni in merito alla base giuridica
+                del trasferimento di Dati al di fuori dell’Unione Europea o ad
+                un’organizzazione internazionale di diritto internazionale
+                pubblico o costituita da due o più paesi, come ad esempio l’ONU,
+                nonché in merito alle misure di sicurezza adottate dal Titolare
+                per proteggere i Dati.L’Utente può verificare se abbia luogo uno
+                dei trasferimenti appena descritti esaminando la sezione di
+                questo documento relativa ai dettagli sul trattamento di Dati
+                Personali o chiedere informazioni al Titolare contattandolo agli
+                estremi riportati in apertura.<br /><br /><strong
+                  >Periodo di conservazione</strong
+                >I Dati sono trattati e conservati per il tempo richiesto dalle
+                finalità per le quali sono stati raccolti.<br />Pertanto:<br />I
+                Dati Personali raccolti per scopi collegati all’esecuzione di un
+                contratto tra il Titolare e l’Utente saranno trattenuti sino a
+                quando sia completata l’esecuzione di tale contratto. I Dati
+                Personali raccolti per finalità riconducibili all’interesse
+                legittimo del Titolare saranno trattenuti sino al
+                soddisfacimento di tale interesse. L’Utente può ottenere
+                ulteriori informazioni in merito all’interesse legittimo
+                perseguito dal Titolare nelle relative sezioni di questo
+                documento o contattando il Titolare.<br />Quando il trattamento
+                è basato sul consenso dell’Utente, il Titolare può conservare i
+                Dati Personali più a lungo sino a quando detto consenso non
+                venga revocato. Inoltre, il Titolare potrebbe essere obbligato a
+                conservare i Dati Personali per un periodo più lungo in
+                ottemperanza ad un obbligo di legge o per ordine di
+                un’autorità.<br />Al termine del periodo di conservazione i Dati
+                Personali saranno cancellati. Pertanto, allo spirare di tale
+                termine il diritto di accesso, cancellazione, rettificazione ed
+                il diritto alla portabilità dei Dati non potranno più essere
+                esercitati.<br
+              /></span>
+            </div>
+            <div class="text-container">
+              <h2>Finalità del trattamento dei dati raccolti<br /></h2>
+              <span
+                ><br />I Dati dell’Utente sono raccolti per consentire al
+                Titolare di fornire il Servizio, adempiere agli obblighi di
+                legge, rispondere a richieste o azioni esecutive, tutelare i
+                propri diritti ed interessi (o quelli di Utenti o di terze
+                parti), individuare eventuali attività dolose o fraudolente,
+                nonché per le seguenti finalità: Registrazione ed autenticazione
+                fornite direttamente da questa Applicazione, Contattare l'Utente
+                e Gestione dei pagamenti. Per ottenere informazioni dettagliate
+                sulle finalità del trattamento e sui Dati Personali trattati per
+                ciascuna finalità, l’Utente può fare riferimento alla sezione
+                “Dettagli sul trattamento dei Dati Personali”.<br
+              /></span>
+            </div>
+            <div class="text-container">
+              <h2>Dettagli sul trattamento dei Dati Personali<br /></h2>
+              <span
+                ><br />I Dati Personali sono raccolti per le seguenti finalità
+                ed utilizzando i seguenti servizi:<br /><br /><strong
+                  >Contattare l'utente</strong
+                ><br />Mailing list o newsletter - con la registrazione alla
+                mailing list o alla newsletter, l’indirizzo email dell’Utente
+                viene automaticamente inserito in una lista di contatti a cui
+                potranno essere trasmessi messaggi email contenenti
+                informazioni, anche di natura commerciale e promozionale,
+                relative a questa Applicazione. L'indirizzo email dell'Utente
+                potrebbe anche essere aggiunto a questa lista come risultato
+                della registrazione a questa Applicazione o dopo aver effettuato
+                un acquisto. Dati Personali trattati: email.<br />Modulo di
+                contatto - l’Utente, compilando con i propri Dati il modulo di
+                contatto, acconsente al loro utilizzo per rispondere alle
+                richieste di informazioni, di preventivo, o di qualunque altra
+                natura indicata dall’intestazione del modulo. Dati Personali
+                trattati: cognome; email; nome.<br /><br /><strong
+                  >Registrazione ed autenticazione fornite direttamente da
+                  questa Applicazione</strong
+                ><br />Con la registrazione o l’autenticazione l’Utente consente
+                a questa Applicazione di identificarlo e di dargli accesso a
+                servizi dedicati. I Dati Personali sono raccolti e conservati
+                esclusivamente a scopo di registrazione o di identificazione. I
+                Dati raccolti sono solo quelli necessari a fornire il servizio
+                richiesto dall’Utente.<br />Registrazione diretta - L’Utente si
+                registra compilando il modulo di registrazione e fornendo
+                direttamente a questa Applicazione i propri Dati Personali. Dati
+                Personali trattati: CAP; cognome; data di nascita; email;
+                indirizzo di fatturazione; nome; password; username; varie
+                tipologie di Dati.<br /><br /><strong
+                  >Gestione dei pagamenti</strong
+                ><br />Se non diversamente specificato, questa Applicazione
+                elabora tutti i pagamenti con carta di credito, bonifico
+                bancario o altri mezzi tramite fornitori esterni di servizi di
+                pagamento. In generale, e salvo diversa indicazione, gli Utenti
+                sono pregati di fornire i dettagli di pagamento e le
+                informazioni personali direttamente a tali fornitori di servizi
+                di pagamento. Questa Applicazione non è coinvolta nella raccolta
+                e nell'elaborazione di tali informazioni: riceverà invece solo
+                una notifica da parte del fornitore di servizi di pagamento in
+                questione circa l'avvenuto pagamento.<br />Stripe è un servizio
+                di pagamento fornito da Stripe Inc, Stripe Technology Europe Ltd
+                oppure da Stripe Payments Ltd, a seconda della posizione in cui
+                questa Applicazione viene utilizzata. Dati Personali trattati:
+                cognome; email; indirizzo di fatturazione; informazioni di
+                pagamento; nome. Luogo del trattamento: Stati Uniti; Irlanda;
+                Regno Unito.<br />Pagamento a mezzo di bonifico - Nel caso di
+                ricezione di denaro il metodo scelto sarà il bonifico bancario
+                diretto sul conto corrente inserito in fase di registrazione e i
+                dati raccolti saranno codice IBAN. Tali dati saranno raccolti e
+                trattati esclusivamente nell'ambito della transazione ed ai soli
+                fini della fatturazione. Dati Personali trattati: informazioni
+                di pagamento.<br
+              /></span>
+            </div>
+            <div class="text-container">
+              <h2>
+                Ulteriori informazioni sul trattamento dei Dati Personali<br />
+              </h2>
+              <span
+                ><br /><strong>Vendita di beni e servizi online</strong><br />I
+                Dati Personali raccolti sono utilizzati per l’erogazione di
+                servizi all’Utente o per la vendita di prodotti, inclusi il
+                pagamento e l’eventuale consegna. I Dati Personali raccolti per
+                perfezionare il pagamento possono essere quelli relativi alla
+                carta di credito, al conto corrente utilizzato per il bonifico o
+                ad altri strumenti di pagamento previsti. I Dati di pagamento
+                raccolti da questa Applicazione dipendono dal sistema di
+                pagamento utilizzato.<br
+              /></span>
+            </div>
+            <div class="text-container">
+              <h2>Diritti dell'utente<br /></h2>
+              <span
+                ><br />Gli Utenti possono esercitare determinati diritti con
+                riferimento ai Dati trattati dal Titolare. In particolare,
+                l’Utente ha il diritto di:<br />revocare il consenso in ogni
+                momento. L’Utente può revocare il consenso al trattamento dei
+                propri Dati Personali precedentemente espresso. Opporsi al
+                trattamento dei propri Dati. L’Utente può opporsi al trattamento
+                dei propri Dati quando esso avviene su una base giuridica
+                diversa dal consenso. Ulteriori dettagli sul diritto di
+                opposizione sono indicati nella sezione sottostante accedere ai
+                propri Dati. L’Utente ha diritto ad ottenere informazioni sui
+                Dati trattati dal Titolare, su determinati aspetti del
+                trattamento ed a ricevere una copia dei Dati trattati.
+                Verificare e chiedere la rettificazione. L’Utente può verificare
+                la correttezza dei propri Dati e richiederne l’aggiornamento o
+                la correzione. Ottenere la limitazione del trattamento. Quando
+                ricorrono determinate condizioni, l’Utente può richiedere la
+                limitazione del trattamento dei propri Dati. In tal caso il
+                Titolare non tratterà i Dati per alcun altro scopo se non la
+                loro conservazione. Ottenere la cancellazione o rimozione dei
+                propri Dati Personali. Quando ricorrono determinate condizioni,
+                l’Utente può richiedere la cancellazione dei propri Dati da
+                parte del Titolare. Ricevere i propri Dati o farli trasferire ad
+                altro titolare. L’Utente ha diritto di ricevere i propri Dati in
+                formato strutturato, di uso comune e leggibile da dispositivo
+                automatico e, ove tecnicamente fattibile, di ottenerne il
+                trasferimento senza ostacoli ad un altro titolare. Questa
+                disposizione è applicabile quando i Dati sono trattati con
+                strumenti automatizzati ed il trattamento è basato sul consenso
+                dell’Utente, su un contratto di cui l’Utente è parte o su misure
+                contrattuali ad esso connesse proporre reclamo. L’Utente può
+                proporre un reclamo all’autorità di controllo della protezione
+                dei dati personali competente o agire in sede giudiziale.<br /><br /><strong
+                  >Dettagli sul diritto d'opposizione</strong
+                ><br />Quando i Dati Personali sono trattati nell’interesse
+                pubblico, nell’esercizio di pubblici poteri di cui è investito
+                il Titolare oppure per perseguire un interesse legittimo del
+                Titolare, gli Utenti hanno diritto ad opporsi al trattamento per
+                motivi connessi alla loro situazione particolare. Si fa presente
+                agli Utenti che, ove i loro Dati fossero trattati con finalità
+                di marketing diretto, possono opporsi al trattamento senza
+                fornire alcuna motivazione. Per scoprire se il Titolare tratti
+                dati con finalità di marketing diretto gli Utenti possono fare
+                riferimento alle rispettive sezioni di questo documento.<br /><br /><strong
+                  >Come esercitare i diritti</strong
+                ><br />Per esercitare i diritti dell’Utente, gli Utenti possono
+                indirizzare una richiesta agli estremi di contatto del Titolare
+                indicati in questo documento. Le richieste sono depositate a
+                titolo gratuito e evase dal Titolare nel più breve tempo
+                possibile, in ogni caso entro un mese.<br /><br /><strong
+                  >Cookie policy</strong
+                ><br />Questa Applicazione fa utilizzo di Strumenti di
+                Tracciamento. Per saperne di più, l’Utente può consultare la
+                Cookie Policy.<br /><br /><strong
+                  >Ulteriori informazioni sul trattamento</strong
+                ><br />Difesa in giudizio I Dati Personali dell’Utente possono
+                essere utilizzati da parte del Titolare in giudizio o nelle fasi
+                preparatorie alla sua eventuale instaurazione per la difesa da
+                abusi nell'utilizzo di questa Applicazione o dei Servizi
+                connessi da parte dell’Utente. L’Utente dichiara di essere
+                consapevole che il Titolare potrebbe essere obbligato a rivelare
+                i Dati per ordine delle autorità pubbliche. Informative
+                specifiche Su richiesta dell’Utente, in aggiunta alle
+                informazioni contenute in questa privacy policy, questa
+                Applicazione potrebbe fornire all'Utente delle informative
+                aggiuntive e contestuali riguardanti Servizi specifici, o la
+                raccolta ed il trattamento di Dati Personali. Log di sistema e
+                manutenzione Per necessità legate al funzionamento ed alla
+                manutenzione, questa Applicazione e gli eventuali servizi terzi
+                da essa utilizzati potrebbero raccogliere log di sistema, ossia
+                file che registrano le interazioni e che possono contenere anche
+                Dati Personali, quali l’indirizzo IP Utente. Informazioni non
+                contenute in questa policy Ulteriori informazioni in relazione
+                al trattamento dei Dati Personali potranno essere richieste in
+                qualsiasi momento al Titolare del Trattamento utilizzando gli
+                estremi di contatto. Risposta alle richieste “Do Not Track”
+                Questa Applicazione non supporta le richieste “Do Not Track”.
+                Per scoprire se gli eventuali servizi di terze parti utilizzati
+                le supportino, l'Utente è invitato a consultare le rispettive
+                privacy policy. Modifiche a questa privacy policy Il Titolare
+                del Trattamento si riserva il diritto di apportare modifiche
+                alla presente privacy policy in qualunque momento notificandolo
+                agli Utenti su questa pagina e, se possibile, su questa
+                Applicazione nonché, qualora tecnicamente e legalmente
+                fattibile, inviando una notifica agli Utenti attraverso uno
+                degli estremi di contatto di cui è in possesso. Si prega dunque
+                di consultare con frequenza questa pagina, facendo riferimento
+                alla data di ultima modifica indicata in fondo. Qualora le
+                modifiche interessino trattamenti la cui base giuridica è il
+                consenso, il Titolare provvederà a raccogliere nuovamente il
+                consenso dell’Utente, se necessario.<br /><br /><strong
+                  >Definizioni</strong
+                ><br />Dati Personali (o Dati) Costituisce dato personale
+                qualunque informazione che, direttamente o indirettamente, anche
+                in collegamento con qualsiasi altra informazione, ivi compreso
+                un numero di identificazione personale, renda identificata o
+                identificabile una persona fisica. Dati di Utilizzo Sono le
+                informazioni raccolte automaticamente attraverso questa
+                Applicazione (anche da applicazioni di parti terze integrate in
+                questa Applicazione), tra cui: gli indirizzi IP o i nomi a
+                dominio dei computer utilizzati dall’Utente che si connette con
+                questa Applicazione, gli indirizzi in notazione URI (Uniform
+                Resource Identifier), l’orario della richiesta, il metodo
+                utilizzato nell’inoltrare la richiesta al server, la dimensione
+                del file ottenuto in risposta, il codice numerico indicante lo
+                stato della risposta dal server (buon fine, errore, ecc.) il
+                paese di provenienza, le caratteristiche del browser e del
+                sistema operativo utilizzati dal visitatore, le varie
+                connotazioni temporali della visita (ad esempio il tempo di
+                permanenza su ciascuna pagina) e i dettagli relativi
+                all’itinerario seguito all’interno dell’Applicazione, con
+                particolare riferimento alla sequenza delle pagine consultate,
+                ai parametri relativi al sistema operativo e all’ambiente
+                informatico dell’Utente. Utente L'individuo che utilizza questa
+                Applicazione che, salvo ove diversamente specificato, coincide
+                con l'Interessato. Interessato La persona fisica cui si
+                riferiscono i Dati Personali. Responsabile del Trattamento (o
+                Responsabile) La persona fisica, giuridica, la pubblica
+                amministrazione e qualsiasi altro ente che tratta dati personali
+                per conto del Titolare, secondo quanto esposto nella presente
+                privacy policy. Titolare del Trattamento (o Titolare) La persona
+                fisica o giuridica, l'autorità pubblica, il servizio o altro
+                organismo che, singolarmente o insieme ad altri, determina le
+                finalità e i mezzi del trattamento di dati personali e gli
+                strumenti adottati, ivi comprese le misure di sicurezza relative
+                al funzionamento ed alla fruizione di questa Applicazione. Il
+                Titolare del Trattamento, salvo quanto diversamente specificato,
+                è il titolare di questa Applicazione. Questa Applicazione Lo
+                strumento hardware o software mediante il quale sono raccolti e
+                trattati i Dati Personali degli Utenti. Servizio Il Servizio
+                fornito da questa Applicazione così come definito nei relativi
+                termini (se presenti) su questo sito/applicazione. Unione
+                Europea (o UE) Salvo ove diversamente specificato, ogni
+                riferimento all’Unione Europea contenuto in questo documento si
+                intende esteso a tutti gli attuali stati membri dell’Unione
+                Europea e dello Spazio Economico Europeo. Riferimenti legali La
+                presente informativa privacy è redatta sulla base di molteplici
+                ordinamenti legislativi, inclusi gli artt. 13 e 14 del
+                Regolamento (UE) 2016/679. Ove non diversamente specificato,
+                questa informativa privacy riguarda esclusivamente questa
+                Applicazione.<br
+              /></span>
+            </div>
+          </div>
         </div>
+      </div>
     </section>
-    <div class="cookie-consent" id="cookie-advice" style="display:none;">
-        <span>Questo sito utilizza cookie tecnici. <a href="#" class="ml-1 privacy">Privacy policy</a> </span>
-        <div class="mt-2 d-flex align-items-center justify-content-center g-2">
-          <button class="allow-button mr-1" id="accept-cookies">Ok</button>
-        </div>
+    <div class="cookie-consent" id="cookie-advice" style="display: none">
+      <span
+        >Questo sito utilizza cookie tecnici.
+        <a href="#" class="ml-1 privacy">Privacy policy</a>
+      </span>
+      <div class="mt-2 d-flex align-items-center justify-content-center g-2">
+        <button class="allow-button mr-1" id="accept-cookies">Ok</button>
+      </div>
     </div>
     <footer class="footer-dark">
-        <div class="container">
-            <div class="row">
-                <div class="col-sm-6 col-md-3 item">
-                    <h3>Servizi</h3>
-                    <ul>
-                        <li><a href="https://bibliontech.it/services/vendere.html">Vendita libri</a></li>
-                        <li><a href="https://bibliontech.it/services/index.html">Acquisto libri</a></li>
-                    </ul>
-                </div>
-                <div class="col-sm-6 col-md-3 item">
-                    <h3>About</h3>
-                    <ul>
-                        <li><a href="https://bibliontech.it/about/terms_and_conditions.html">Termini e condizioni</a></li>
-                        <li><a href="https://bibliontech.it/about/privacy_policy.html">Privacy policy</a></li>
-                        <li><a href="https://bibliontech.it/contattaci/">Contattaci</a></li>
-                    </ul>
-                </div>
-                <div class="col-md-6 item text">
-                    <h3>Bibliontech</h3>
-                    <p>BiblionTech è il servizio che ti aiuta a vendere libri che non usi più oppure a trovare quelli di
-                        cui hai bisogno.<br></p>
-                </div>
-                <div class="col item social"><a href="https://www.instagram.com/bibliontech.it/"><svg
-                            xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" fill="currentColor"
-                            viewBox="0 0 16 16" class="bi bi-instagram">
-                            <path
-                                d="M8 0C5.829 0 5.556.01 4.703.048 3.85.088 3.269.222 2.76.42a3.917 3.917 0 0 0-1.417.923A3.927 3.927 0 0 0 .42 2.76C.222 3.268.087 3.85.048 4.7.01 5.555 0 5.827 0 8.001c0 2.172.01 2.444.048 3.297.04.852.174 1.433.372 1.942.205.526.478.972.923 1.417.444.445.89.719 1.416.923.51.198 1.09.333 1.942.372C5.555 15.99 5.827 16 8 16s2.444-.01 3.298-.048c.851-.04 1.434-.174 1.943-.372a3.916 3.916 0 0 0 1.416-.923c.445-.445.718-.891.923-1.417.197-.509.332-1.09.372-1.942C15.99 10.445 16 10.173 16 8s-.01-2.445-.048-3.299c-.04-.851-.175-1.433-.372-1.941a3.926 3.926 0 0 0-.923-1.417A3.911 3.911 0 0 0 13.24.42c-.51-.198-1.092-.333-1.943-.372C10.443.01 10.172 0 7.998 0h.003zm-.717 1.442h.718c2.136 0 2.389.007 3.232.046.78.035 1.204.166 1.486.275.373.145.64.319.92.599.28.28.453.546.598.92.11.281.24.705.275 1.485.039.843.047 1.096.047 3.231s-.008 2.389-.047 3.232c-.035.78-.166 1.203-.275 1.485a2.47 2.47 0 0 1-.599.919c-.28.28-.546.453-.92.598-.28.11-.704.24-1.485.276-.843.038-1.096.047-3.232.047s-2.39-.009-3.233-.047c-.78-.036-1.203-.166-1.485-.276a2.478 2.478 0 0 1-.92-.598 2.48 2.48 0 0 1-.6-.92c-.109-.281-.24-.705-.275-1.485-.038-.843-.046-1.096-.046-3.233 0-2.136.008-2.388.046-3.231.036-.78.166-1.204.276-1.486.145-.373.319-.64.599-.92.28-.28.546-.453.92-.598.282-.11.705-.24 1.485-.276.738-.034 1.024-.044 2.515-.045v.002zm4.988 1.328a.96.96 0 1 0 0 1.92.96.96 0 0 0 0-1.92zm-4.27 1.122a4.109 4.109 0 1 0 0 8.217 4.109 4.109 0 0 0 0-8.217zm0 1.441a2.667 2.667 0 1 1 0 5.334 2.667 2.667 0 0 1 0-5.334z">
-                            </path>
-                        </svg></a></div>
-            </div>
-            <p class="copyright">BiblionTech © 2022</p>
+      <div class="container">
+        <div class="row">
+          <div class="col-sm-6 col-md-3 item">
+            <h3>Servizi</h3>
+            <ul>
+              <li>
+                <a href="https://bibliontech.it/services/vendere.html"
+                  >Vendita libri</a
+                >
+              </li>
+              <li>
+                <a href="https://bibliontech.it/services/index.html"
+                  >Acquisto libri</a
+                >
+              </li>
+            </ul>
+          </div>
+          <div class="col-sm-6 col-md-3 item">
+            <h3>About</h3>
+            <ul>
+              <li>
+                <a href="https://bibliontech.it/about/terms_and_conditions.html"
+                  >Termini e condizioni</a
+                >
+              </li>
+              <li>
+                <a href="https://bibliontech.it/about/privacy_policy.html"
+                  >Privacy policy</a
+                >
+              </li>
+              <li>
+                <a href="https://bibliontech.it/contattaci/">Contattaci</a>
+              </li>
+            </ul>
+          </div>
+          <div class="col-md-6 item text">
+            <h3>Bibliontech</h3>
+            <p>
+              BiblionTech è il servizio che ti aiuta a vendere libri che non usi
+              più oppure a trovare quelli di cui hai bisogno.<br />
+            </p>
+          </div>
+          <div class="col item social">
+            <a href="https://www.instagram.com/bibliontech.it/"
+              ><svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="1em"
+                height="1em"
+                fill="currentColor"
+                viewBox="0 0 16 16"
+                class="bi bi-instagram"
+              >
+                <path
+                  d="M8 0C5.829 0 5.556.01 4.703.048 3.85.088 3.269.222 2.76.42a3.917 3.917 0 0 0-1.417.923A3.927 3.927 0 0 0 .42 2.76C.222 3.268.087 3.85.048 4.7.01 5.555 0 5.827 0 8.001c0 2.172.01 2.444.048 3.297.04.852.174 1.433.372 1.942.205.526.478.972.923 1.417.444.445.89.719 1.416.923.51.198 1.09.333 1.942.372C5.555 15.99 5.827 16 8 16s2.444-.01 3.298-.048c.851-.04 1.434-.174 1.943-.372a3.916 3.916 0 0 0 1.416-.923c.445-.445.718-.891.923-1.417.197-.509.332-1.09.372-1.942C15.99 10.445 16 10.173 16 8s-.01-2.445-.048-3.299c-.04-.851-.175-1.433-.372-1.941a3.926 3.926 0 0 0-.923-1.417A3.911 3.911 0 0 0 13.24.42c-.51-.198-1.092-.333-1.943-.372C10.443.01 10.172 0 7.998 0h.003zm-.717 1.442h.718c2.136 0 2.389.007 3.232.046.78.035 1.204.166 1.486.275.373.145.64.319.92.599.28.28.453.546.598.92.11.281.24.705.275 1.485.039.843.047 1.096.047 3.231s-.008 2.389-.047 3.232c-.035.78-.166 1.203-.275 1.485a2.47 2.47 0 0 1-.599.919c-.28.28-.546.453-.92.598-.28.11-.704.24-1.485.276-.843.038-1.096.047-3.232.047s-2.39-.009-3.233-.047c-.78-.036-1.203-.166-1.485-.276a2.478 2.478 0 0 1-.92-.598 2.48 2.48 0 0 1-.6-.92c-.109-.281-.24-.705-.275-1.485-.038-.843-.046-1.096-.046-3.233 0-2.136.008-2.388.046-3.231.036-.78.166-1.204.276-1.486.145-.373.319-.64.599-.92.28-.28.546-.453.92-.598.282-.11.705-.24 1.485-.276.738-.034 1.024-.044 2.515-.045v.002zm4.988 1.328a.96.96 0 1 0 0 1.92.96.96 0 0 0 0-1.92zm-4.27 1.122a4.109 4.109 0 1 0 0 8.217 4.109 4.109 0 0 0 0-8.217zm0 1.441a2.667 2.667 0 1 1 0 5.334 2.667 2.667 0 0 1 0-5.334z"
+                ></path></svg
+            ></a>
+          </div>
         </div>
+        <p class="copyright">BiblionTech © 2022</p>
+      </div>
     </footer>
     <script src="../assets/bootstrap/js/bootstrap.min.js"></script>
     <script src="../assets/js/cookie.js"></script>
@@ -120,6 +527,5 @@
     <script src="../assets/js/sell.js"></script>
     <script src="../assets/js/typewriter.js"></script>
     <script src="../assets/js/historyReplace.js"></script>
-</body>
-
+  </body>
 </html>

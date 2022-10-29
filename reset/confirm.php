@@ -7,42 +7,41 @@ if (isset($_SESSION['user_token'])) {
     require_once('../includes/functions.php');
 }
 if (isset($_GET["key"]) && isset($_GET["email"]) && isset($_GET["action"]) && ($_GET["action"] === "reset")) {
-        $curDate = date("Y-m-d H:i:s");
-        $key = clean_data($_GET["key"]);
-        $email = clean_data($_GET["email"]);
-        if (filter_var($email, FILTER_VALIDATE_EMAIL)) {
-            $email = filter_var($email, FILTER_SANITIZE_EMAIL);
-        } else {
-            header('location: ../index.php');
-            die();
-        }
-        $query = "
-            SELECT * 
-            FROM `password_reset_temp` 
-            WHERE `chiave`=:key AND `email`=:email
-            ";
-        $check = $pdo->prepare($query);
-        $check->bindParam(':key', $key, PDO::PARAM_STR);
-        $check->bindParam(':email', $email, PDO::PARAM_STR);
-        $check->execute();
-    
-        $row = $check->rowCount();
-        if ($row === 0){
-            header('location: ../index.php');
-            die();
-        } else {
-            $row = $check->fetch();
-            $expDate = $row['expDate'];
-            if ($expDate < $curDate) {
-                header('location: ../index.php');
-                die();
-            }
-        }
-        
+    $curDate = date("Y-m-d H:i:s");
+    $key = clean_data($_GET["key"]);
+    $email = clean_data($_GET["email"]);
+    if (filter_var($email, FILTER_VALIDATE_EMAIL)) {
+        $email = filter_var($email, FILTER_SANITIZE_EMAIL);
     } else {
         header('location: ../index.php');
         die();
     }
+    $query = "
+            SELECT * 
+            FROM `password_reset_temp` 
+            WHERE `chiave`=:key AND `email`=:email
+            ";
+    $check = $pdo->prepare($query);
+    $check->bindParam(':key', $key, PDO::PARAM_STR);
+    $check->bindParam(':email', $email, PDO::PARAM_STR);
+    $check->execute();
+
+    $row = $check->rowCount();
+    if ($row === 0) {
+        header('location: ../index.php');
+        die();
+    } else {
+        $row = $check->fetch();
+        $expDate = $row['expDate'];
+        if ($expDate < $curDate) {
+            header('location: ../index.php');
+            die();
+        }
+    }
+} else {
+    header('location: ../index.php');
+    die();
+}
 
 
 

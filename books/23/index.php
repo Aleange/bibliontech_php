@@ -1,1 +1,3 @@
-<?php $book = 23; require_once("../book.php"); ?>
+<?php
+
+$book = 23; require_once("../book.php");

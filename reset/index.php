@@ -1,4 +1,4 @@
-<?php 
+<?php
 require_once('../includes/session.php');
 if (isset($_SESSION['user_token'])) {
     header('location: ../my_account/');
@@ -99,11 +99,11 @@ if (isset($_SESSION['user_token'])) {
 
 </html>
 
-<?php 
+<?php
 
 if (isset($_POST['reset'])) {
     $user_email = $_POST['email'];
-    if(filter_var($user_email, FILTER_VALIDATE_EMAIL) && !empty($user_email)) {
+    if (filter_var($user_email, FILTER_VALIDATE_EMAIL) && !empty($user_email)) {
         $user_email = filter_var($user_email, FILTER_SANITIZE_EMAIL);
         //VERIFICO CHE LA MAIL ESISTA NEL DATABASE
         $query = "
@@ -111,97 +111,100 @@ if (isset($_POST['reset'])) {
             FROM users
             WHERE email = :email
         ";
-        
+
         $check = $pdo->prepare($query);
         $check->bindParam(':email', $user_email, PDO::PARAM_STR);
         $check->execute();
-        
+
         $user = $check->fetchAll(PDO::FETCH_ASSOC);
 
-        if ($check->rowCount() === 1)  {
+        if ($check->rowCount() === 1) {
 
             //se l'email è presente creo una riga nel database con
             //la sua mail una chiave e la data di scadenza del link
             $expFormat = mktime(
-                date("H"), date("i"), date("s"), date("m") ,date("d")+1, date("Y")
-                );
-                $expDate = date("Y-m-d H:i:s",$expFormat);
-                $key = md5($email);
-                $addKey = substr(md5(uniqid(rand(),1)),3,10);
-                $key = $key . $addKey;
-             // Insert Temp Table
-             $query = "
+                date("H"),
+                date("i"),
+                date("s"),
+                date("m"),
+                date("d")+1,
+                date("Y")
+            );
+            $expDate = date("Y-m-d H:i:s", $expFormat);
+            $key = md5($email);
+            $addKey = substr(md5(uniqid(rand(), 1)), 3, 10);
+            $key = $key . $addKey;
+            // Insert Temp Table
+            $query = "
             INSERT INTO `password_reset_temp` VALUES
             (:email,:chiave,:expDate)
             ";
-        
+
             $check = $pdo->prepare($query);
             $check->bindParam(':email', $user_email, PDO::PARAM_STR);
             $check->bindParam(':chiave', $key, PDO::PARAM_STR);
             $check->bindParam(':expDate', $expDate, PDO::PARAM_STR);
-            
+
             if ($check->execute()) {
-                sendMail($user_email,$key);
+                sendMail($user_email, $key);
                 echo "<script>document.getElementById('pw-request').style.display = 'none';</script>";
                 echo "<script>document.getElementById('pw-msg').style.display = 'block';</script>";
                 die();
             }
-            
         } else {
             echo "<script>document.getElementById('pw-request').style.display = 'none';</script>";
             echo "<script>document.getElementById('pw-msg').style.display = 'block';</script>";
             die();
         }
-
-    }
-    else {
+    } else {
         die();
     }
 }
 
-function sendMail($emailTo,$chiave) {
+function sendMail($emailTo, $chiave)
+{
     error_reporting(E_ALL);
-    
+
     // Genera un boundary
     $mail_boundary = "=_NextPart_" . md5(uniqid(time()));
-    
+
     $to = $emailTo;
     $subject = "Recupera password";
     $sender = "Password dimenticata < postmaster@bibliontech.it >";
-    
-    
+
+
     $headers = "From: $sender\n";
     $headers .= "MIME-Version: 1.0\n";
     $headers .= "Content-Type: multipart/alternative;\n\tboundary=\"$mail_boundary\"\n";
     $headers .= "X-Mailer: PHP " . phpversion();
     $activate_link = "https://bibliontech.it/reset/confirm.php?email=".$emailTo."&key=".$chiave."&action=reset";
-     
+
     // Corpi del messaggio nei due formati testo e HTML
     $text_msg = "messaggio in formato testo";
     $html_msg = "<b>messaggio</b> in formato <p><a href='http://www.aruba.it'>html</a><br><img src=\"http://hosting.aruba.it/image_top/top_01.gif\" border=\"0\"></p>";
-     
+
     // Costruisci il corpo del messaggio da inviare
     $msg = "This is a multi-part message in MIME format.\n\n";
     $msg .= "--$mail_boundary\n";
     $msg .= "Content-Type: text/plain; charset=\"iso-8859-1\"\n";
     $msg .= "Content-Transfer-Encoding: 8bit\n\n";
     $msg .= "Per recuperare la password clicca sul seguente link: ".$activate_link;  // aggiungi il messaggio in formato text
-     
+
     $msg .= "\n--$mail_boundary\n";
     $msg .= "Content-Type: text/html; charset=\"iso-8859-1\"\n";
     $msg .= "Content-Transfer-Encoding: 8bit\n\n";
     $msg .= "<p>Per recuperare la password clicca sul seguente link : <a href='".$activate_link."'>$activate_link</a></p>";  // aggiungi il messaggio in formato HTML
-     
+
     // Boundary di terminazione multipart/alternative
     $msg .= "\n--$mail_boundary--\n";
-     
+
     // Imposta il Return-Path (funziona solo su hosting Windows)
     ini_set("sendmail_from", $sender);
-     
+
     // Invia il messaggio, il quinto parametro "-f$sender" imposta il Return-Path su hosting Linux
-    if (mail($to, $subject, $msg, $headers, "-f$sender")) { 
+    if (mail($to, $subject, $msg, $headers, "-f$sender")) {
         return true;
-    } else { 
+    } else {
         return false;
     }
 }

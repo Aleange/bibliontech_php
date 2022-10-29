@@ -8,13 +8,15 @@ $options = array(
     )
 );
 
-function clean_data($testo) {
+function clean_data($testo)
+{
     $testo = trim($testo);
     $testo = htmlspecialchars($testo);
     return $testo;
 }
 
-function getAutori($book_id) {
+function getAutori($book_id)
+{
     global $pdo;
     $id = intval($book_id);
     if ($id === 0) {
@@ -22,7 +24,7 @@ function getAutori($book_id) {
     }
     $sql = "SELECT * FROM autori WHERE book_id = :book_id";
     $stmt = $pdo->prepare($sql);
-    $stmt->bindParam(":book_id",$id,PDO::PARAM_INT);
+    $stmt->bindParam(":book_id", $id, PDO::PARAM_INT);
     if (!$stmt->execute()) {
         return "";
     }
@@ -32,15 +34,16 @@ function getAutori($book_id) {
         $nome = $autore['nome'];
         $res.= "<a href='https://bibliontech.it/acquista/?autore=$nome'>$nome</a>, ";
     }
-    $res = substr($res,0,-2);
+    $res = substr($res, 0, -2);
     return $res;
 }
 
-function getBooksBought($user_id) {
+function getBooksBought($user_id)
+{
     global $pdo;
     $sql = "SELECT * FROM orders WHERE buyer_id = :id";
     $stmt = $pdo->prepare($sql);
-    $stmt->bindParam(':id',$user_id,PDO::PARAM_INT);
+    $stmt->bindParam(':id', $user_id, PDO::PARAM_INT);
     if ($stmt->execute()) {
         $num_libri = $stmt->rowCount();
         if ($num_libri > 0) {
@@ -57,7 +60,7 @@ function getBooksBought($user_id) {
 
                 $sql1 = "SELECT * FROM books WHERE id = :id";
                 $stmt1 = $pdo->prepare($sql1);
-                $stmt1->bindParam(':id',$book_id,PDO::PARAM_INT);
+                $stmt1->bindParam(':id', $book_id, PDO::PARAM_INT);
                 $stmt1->execute();
                 $result = $stmt1->fetchAll();
                 $image = $result[0]['image'];
@@ -69,19 +72,19 @@ function getBooksBought($user_id) {
                 $autori = $result[0]['autori'];
                 if ($status === 0) {
                     $status = 'non spedito';
-                } else if ($status === 1) {
+                } elseif ($status === 1) {
                     $status = 'spedito';
-                } else if ($status === 2) {
+                } elseif ($status === 2) {
                     $status = 'consegnato';
                 }
 
                 $sql2 = "SELECT * FROM users WHERE id = :id";
                 $stmt2 = $pdo->prepare($sql2);
-                $stmt2->bindParam(':id',$seller_id,PDO::PARAM_INT);
+                $stmt2->bindParam(':id', $seller_id, PDO::PARAM_INT);
                 $stmt2->execute();
                 $result1 = $stmt2->fetchAll();
                 $seller_username = $result1[0]['username'];
-                
+
                 $autori = getAutori($book_id);
 
                 echo "
@@ -99,7 +102,7 @@ function getBooksBought($user_id) {
                     <div><span>libro acquistato da <a href='../users/$seller_username/'>$seller_username</a>&nbsp;in
                             data&nbsp;<span>$created_at</span><br><br>stato:&nbsp;<span
                                 style='font-weight: bold;'>$status</span></span>";
-                
+
                 if ($status === 'spedito') {
                     echo "
                         <div class='d-flex justify-content-center' style='width: 100%;'>
@@ -113,14 +116,14 @@ function getBooksBought($user_id) {
                             </form>
                             
                         </div>";
-                } else if ($status === 'non spedito') {
+                } elseif ($status === 'non spedito') {
                     echo "
                         <div class='d-flex justify-content-center' style='width: 100%;'>
                                 <button class='btn round-btn click shadow-none'>
                                     <i class='fas fa-truck'></i>
                                 </button>
                         </div>";
-                } else if ($status === 'consegnato') {
+                } elseif ($status === 'consegnato') {
                     echo "
                         <div class='d-flex justify-content-center' style='width: 100%;'>
                                 <button class='btn round-btn click shadow-none'>
@@ -128,9 +131,9 @@ function getBooksBought($user_id) {
                                 </button>
                         </div>";
                 }
-                
-                        
-                    echo "   
+
+
+                echo "   
                     </div>
                 </div>
             </div>
@@ -141,11 +144,12 @@ function getBooksBought($user_id) {
     }
 }
 
-function getBooksSold($user_id) {
+function getBooksSold($user_id)
+{
     global $pdo;
     $sql = "SELECT * FROM books WHERE user_id = :id";
     $stmt = $pdo->prepare($sql);
-    $stmt->bindParam(':id',$user_id,PDO::PARAM_INT);
+    $stmt->bindParam(':id', $user_id, PDO::PARAM_INT);
     if ($stmt->execute()) {
         $num_libri = $stmt->rowCount();
         if ($num_libri === 0) {
@@ -157,7 +161,7 @@ function getBooksSold($user_id) {
                 //prendo lo stato spedizione del libro
                 $sql1 = "SELECT * FROM orders WHERE book_id = :id";
                 $stmt1 = $pdo->prepare($sql1);
-                $stmt1->bindParam(':id',$id,PDO::PARAM_INT);
+                $stmt1->bindParam(':id', $id, PDO::PARAM_INT);
                 $statusSpedizione = 0;
                 $ordinato = false;
                 if ($stmt1->execute()) {
@@ -167,15 +171,15 @@ function getBooksSold($user_id) {
                         $statusSpedizione = $rowSpedizione[0]['status'];
                         $buyer_id = $rowSpedizione[0]['buyer_id'];
                         $sold_at = $rowSpedizione[0]['created_at'];
-                        
+
                         $sqlSeller = "SELECT * FROM users WHERE id = :id";
                         $stmtSeller = $pdo->prepare($sqlSeller);
-                        $stmtSeller -> bindParam(":id",$buyer_id,PDO::PARAM_STR);
+                        $stmtSeller -> bindParam(":id", $buyer_id, PDO::PARAM_STR);
                         $stmtSeller->execute();
                         $rowsSeller = $stmtSeller->fetchAll();
                         $buyer = $rowsSeller[0]['username'];
                     } else {
-                        $statusSpedizione = 0; 
+                        $statusSpedizione = 0;
                     }
                 }
 
@@ -192,16 +196,15 @@ function getBooksSold($user_id) {
                 $autori = getAutori($id);
                 if ($statusSpedizione === 0) {
                     $stat = 'non spedito';
-                } else if ($statusSpedizione === 1) {
+                } elseif ($statusSpedizione === 1) {
                     $stat = 'spedito';
-                } else if ($statusSpedizione === 2) {
+                } elseif ($statusSpedizione === 2) {
                     $stat = 'consegnato';
                 }
                 if ($status === 0) {
                     $class = "book";
                 } else {
                     $class = "book sold";
-        
                 }
                 echo "
                 
@@ -220,42 +223,41 @@ function getBooksSold($user_id) {
                         </div>
                         <button class='btn btn-close shadow-none click' id='button-delete' onclick='displayDelete($id);' type='button'></button>";
 
-                        if ($ordinato) {
-                            echo "<div class='sold-details'>
+                if ($ordinato) {
+                    echo "<div class='sold-details'>
                             <div>
                                 <span>libro venduto a&nbsp;<a href='https://bibliontech.it/users/$buyer'>$buyer</a>&nbsp;in data&nbsp;<span>$sold_at</span><br></span>
                                 <br>
                                 <span style='font-weight: bold;'>$stat</span><br>
                                 <div class='d-flex justify-content-center' style='width: 100%;'>
                                 ";
-                                    if ($statusSpedizione === 2) {
-                                        echo "<button class='btn round-btn click shadow-none' type='button'>
+                    if ($statusSpedizione === 2) {
+                        echo "<button class='btn round-btn click shadow-none' type='button'>
                                         <i class='fas fa-check-double'></i>
                                         </button>";
-                                    } else {
-                                        echo "<form class='spedizione' action='spedito.php' method='post'>
+                    } else {
+                        echo "<form class='spedizione' action='spedito.php' method='post'>
                                     <input hidden='true' name='spedito' value='$id' type='number'>
                                     <button class='btn round-btn click shadow-none' type='submit' name='spedisci'>
                                         <i class='fas fa-truck'></i></button>
                                         </form>";
-                                    }    
-                                    echo "
+                    }
+                    echo "
                                     
                                 </div>
                             </div>
                         </div>
                     </div>";
-                        } else {
-                            echo "</div>";
-                        }
-                                
-                    
+                } else {
+                    echo "</div>";
+                }
             }
         }
     }
 }
 
-function getTotalPages($per_page) {
+function getTotalPages($per_page)
+{
     global $pdo;
     $sql = "SELECT * FROM books WHERE status = 0";
     $stmt = $pdo->prepare($sql);
@@ -267,7 +269,8 @@ function getTotalPages($per_page) {
     return $total_pages;
 }
 
-function getTotalRecords() {
+function getTotalRecords()
+{
     global $pdo;
     $sql = "SELECT * FROM books WHERE status = 0";
     $stmt = $pdo->prepare($sql);
@@ -277,7 +280,8 @@ function getTotalRecords() {
     return $num_libri;
 }
 
-function getBooks($start_from) {
+function getBooks($start_from)
+{
     global $pdo;
     $sql = "SELECT * FROM books WHERE status = 0 LIMIT $start_from,20";
     $stmt = $pdo->prepare($sql);
@@ -286,9 +290,8 @@ function getBooks($start_from) {
         $total_records = $num_libri;
         if ($num_libri === 0) {
             echo "<h3>Ancora nessun libro in vendita</h3>";
-            
+
             $num_total_books = 0;
-            
         } else {
             $res = $stmt->fetchAll();
             foreach ($res as $row) {
@@ -305,8 +308,8 @@ function getBooks($start_from) {
                 $status = $row['status'];
                 $autori = $row['autori'];
                 $autori = getAutori($id);
-                
-                    echo "
+
+                echo "
                 <div class='book'>
     <div class='d-md-flex justify-content-md-center book-img'><a href='../books/$id/'><img src=$image /></a></div>
     <div class='book-info'>
@@ -315,20 +318,19 @@ function getBooks($start_from) {
     </div>
     </div>
                     ";
-                    
-                }
             }
         }
+    }
 }
 
-function getBooksOfUser($user) {
+function getBooksOfUser($user)
+{
     global $pdo;
-    
+
     $sql = "SELECT * FROM books WHERE status = 0 AND user_id = :user";
     $stmt = $pdo->prepare($sql);
-    $stmt->bindParam(':user',$user,PDO::PARAM_INT);
+    $stmt->bindParam(':user', $user, PDO::PARAM_INT);
     if ($stmt->execute()) {
-       
         $res = $stmt->fetchAll();
         foreach ($res as $row) {
             $id = $row['id'];
@@ -344,8 +346,8 @@ function getBooksOfUser($user) {
             $status = $row['status'];
             $autori = $row['autori'];
             $autori = getAutori($id);
-            
-                echo "
+
+            echo "
                 <div class='book'>
                                     <div class='book-img'><a href='../../books/$id/'><img
                                                 src='$image'></a>
@@ -356,18 +358,17 @@ function getBooksOfUser($user) {
                                         <div><span class='book-price'><strong>€&nbsp;</strong>$price<br></span></div>
                                     </div>
                                 </div>";
-                    
-            
         }
-        }
+    }
 }
 
-function getSellingBooksNumber($user) {
+function getSellingBooksNumber($user)
+{
     global $pdo;
-    
+
     $sql = "SELECT * FROM books WHERE status = 0 AND user_id = :user";
     $stmt = $pdo->prepare($sql);
-    $stmt->bindParam(':user',$user,PDO::PARAM_INT);
+    $stmt->bindParam(':user', $user, PDO::PARAM_INT);
     if ($stmt->execute()) {
         $res = $stmt->fetchAll();
         echo sizeof($res);
@@ -376,12 +377,13 @@ function getSellingBooksNumber($user) {
     }
 }
 
-function getSoldBooksNumber($user) {
+function getSoldBooksNumber($user)
+{
     global $pdo;
-    
+
     $sql = "SELECT * FROM orders WHERE seller_id = :user";
     $stmt = $pdo->prepare($sql);
-    $stmt->bindParam(':user',$user,PDO::PARAM_INT);
+    $stmt->bindParam(':user', $user, PDO::PARAM_INT);
     if ($stmt->execute()) {
         $res = $stmt->fetchAll();
         echo sizeof($res);
@@ -390,25 +392,25 @@ function getSoldBooksNumber($user) {
     }
 }
 
-function getReviewsOfUser($user) {
+function getReviewsOfUser($user)
+{
     global $pdo;
     if (isset($_SESSION['user_token'])) {
         $loggato_id = intval($_SESSION['session_user']);
     }
     $sql = "SELECT * FROM recensioni WHERE recensito = :user";
     $stmt = $pdo->prepare($sql);
-    $stmt->bindParam(':user',$user,PDO::PARAM_INT);
+    $stmt->bindParam(':user', $user, PDO::PARAM_INT);
     $i = 1;
     if ($stmt->execute()) {
-       
         $res = $stmt->fetchAll();
         foreach ($res as $row) {
-             $id_recensione = intval($row['id']);                  
-           $id_recensore = intval($row['recensore']);
+            $id_recensione = intval($row['id']);
+            $id_recensore = intval($row['recensore']);
             if ($id_recensore === 0) {
                 return;
             }
-            if ($id_recensore === $loggato_id ) {
+            if ($id_recensore === $loggato_id) {
                 $same = true;
             }
             $testo = clean_data($row['testo']);
@@ -418,12 +420,12 @@ function getReviewsOfUser($user) {
             }
             $sql1 = "SELECT * FROM users WHERE id = :user";
             $stmt1 = $pdo->prepare($sql1);
-            $stmt1->bindParam(':user',$id_recensore,PDO::PARAM_INT);
+            $stmt1->bindParam(':user', $id_recensore, PDO::PARAM_INT);
             $stmt1->execute();
             $res1 = $stmt1->fetchAll();
             $username = $res1[0]['username'];
             $profile_image = $res1[0]['profile_image'];
-            if (substr($profile_image,0,4) !== 'http') {
+            if (substr($profile_image, 0, 4) !== 'http') {
                 $profile_image = '../../assets/img/profile_images/'.$profile_image;
             }
 
@@ -433,7 +435,7 @@ function getReviewsOfUser($user) {
             if (isset($same) && $same === true) {
                 echo "<button class='btn btn-close shadow-none click' type='button' onclick='displayDeleteReview($id_recensione);'></button>";
             }
-                                echo "<div class='d-flex justify-content-center reviewer-info'>
+            echo "<div class='d-flex justify-content-center reviewer-info'>
                                     <div class='d-sm-flex align-items-sm-center' style='width: 100%;'>
                                         <div class='d-flex justify-content-center align-items-center'><img
                                                 class='rounded-circle'
@@ -441,20 +443,20 @@ function getReviewsOfUser($user) {
                                             <a href='https://bibliontech.it/users/$username'><h1>$username</h1></a>
                                         </div>
                                         <div class='d-flex justify-content-center justify-content-sm-end star-rate'>";
-                                        
-                                        for ($i = 0; $i < $valutazione;$i++) {
-                                            echo '
+
+            for ($i = 0; $i < $valutazione;$i++) {
+                echo '
                                             <i class="fas fa-star"></i>
                                             ';
-                                        }
-                                        for ($i = 0; $i < 5 - $valutazione;$i++) {
-                                            echo '
+            }
+            for ($i = 0; $i < 5 - $valutazione;$i++) {
+                echo '
                                             <i class="fas fa-star not-checked"></i>
                                             ';
-                                        }
+            }
 
-                                                
-               echo "             </div>
+
+            echo "             </div>
                                     </div>
                                 </div>
                                 <div class='review-content' id='$i'>
@@ -478,14 +480,15 @@ function getReviewsOfUser($user) {
             
             ";
         }
-        }
+    }
 }
 
-function getAverageRating($user) {
+function getAverageRating($user)
+{
     global $pdo;
     $sql = "SELECT avg(valutazione) as valutazione FROM recensioni WHERE recensito = :user";
     $stmt = $pdo->prepare($sql);
-    $stmt->bindParam(':user',$user,PDO::PARAM_INT);
+    $stmt->bindParam(':user', $user, PDO::PARAM_INT);
     if ($stmt->execute()) {
         $numRows = $stmt->rowCount();
         if ($numRows > 0) {
@@ -512,7 +515,6 @@ function getAverageRating($user) {
                     <i class="fas fa-star not-checked"></i>
                     ';
                 }
-
             } else {
                 for ($i = 0; $i < $valutazione;$i++) {
                     echo '
@@ -525,16 +527,15 @@ function getAverageRating($user) {
                     ';
                 }
             }
-            }
-            
-
-        } 
+        }
     }
-    
+}
 
 
 
-function getFirstBookImage($book_id) {
+
+function getFirstBookImage($book_id)
+{
     $options = array(
         'options' => array(
             'default' => 0, // value to return if the filter fails
@@ -548,7 +549,7 @@ function getFirstBookImage($book_id) {
         global $pdo;
         $sql = "SELECT * FROM images WHERE book_id = :id";
         $stmt = $pdo->prepare($sql);
-        $stmt->bindParam(':id',$id,PDO::PARAM_INT);
+        $stmt->bindParam(':id', $id, PDO::PARAM_INT);
         if ($stmt->execute()) {
             $rows = $stmt->fetchAll();
             $image = $rows[0]['file_name'];
@@ -561,7 +562,8 @@ function getFirstBookImage($book_id) {
     return "";
 }
 
-function getFirstBookImage1($book_id) {
+function getFirstBookImage1($book_id)
+{
     global $pdo;
     $id = intval($book_id);
     $options = array(
@@ -575,7 +577,7 @@ function getFirstBookImage1($book_id) {
     } else {
         $sql = "SELECT * FROM images WHERE book_id = :id";
         $stmt = $pdo->prepare($sql);
-        $stmt->bindParam(':id',$id,PDO::PARAM_INT);
+        $stmt->bindParam(':id', $id, PDO::PARAM_INT);
         if ($stmt->execute()) {
             $rows = $stmt->fetchAll();
             $image = $rows[0]['file_name'];
@@ -588,7 +590,8 @@ function getFirstBookImage1($book_id) {
     return "/";
 }
 
-function getFirstBookImage2($book_id) {
+function getFirstBookImage2($book_id)
+{
     global $pdo;
     $id = intval($book_id);
     $options = array(
@@ -602,7 +605,7 @@ function getFirstBookImage2($book_id) {
     } else {
         $sql = "SELECT * FROM images WHERE book_id = :id";
         $stmt = $pdo->prepare($sql);
-        $stmt->bindParam(':id',$id,PDO::PARAM_INT);
+        $stmt->bindParam(':id', $id, PDO::PARAM_INT);
         if ($stmt->execute()) {
             $rows = $stmt->fetchAll();
             $image = $rows[0]['file_name'];
@@ -615,7 +618,8 @@ function getFirstBookImage2($book_id) {
     return "/a";
 }
 
-function getBooksTable() {
+function getBooksTable()
+{
     global $pdo;
     $sql = "SELECT * FROM books";
     $stmt = $pdo->prepare($sql);
@@ -674,10 +678,10 @@ function getBooksTable() {
     </tr>
     </form>";
     }
-    
 }
 
-function getUsersTable() {
+function getUsersTable()
+{
     global $pdo;
     $sql = "SELECT * FROM users";
     $stmt = $pdo->prepare($sql);
@@ -732,11 +736,11 @@ function getUsersTable() {
     </tr>
     </form>";
     }
-    
 }
 
 
-function getOrdersTable() {
+function getOrdersTable()
+{
     global $pdo;
     $sql = "SELECT * FROM orders";
     $stmt = $pdo->prepare($sql);
@@ -783,7 +787,7 @@ function getOrdersTable() {
         }
         if ($status === 0) {
             $status = "non spedito";
-        } else if ($status === 1) {
+        } elseif ($status === 1) {
             $status = "spedito";
         } else {
             $status = "consegnato";
@@ -810,10 +814,10 @@ function getOrdersTable() {
     </tr>
     </form>";
     }
-    
 }
 
-function getSaldiTable() {
+function getSaldiTable()
+{
     global $pdo;
     $sql = "SELECT * FROM saldo";
     $stmt = $pdo->prepare($sql);
@@ -848,7 +852,7 @@ function getSaldiTable() {
             header("Location: ../index.php");
             die();
         }
-        
+
         echo "
         <form class='spedizione' action='delete.php' method='post'>
     <tr>
@@ -860,7 +864,4 @@ function getSaldiTable() {
     </tr>
     </form>";
     }
-    
 }
-
-?>

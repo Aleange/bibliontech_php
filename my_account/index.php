@@ -13,7 +13,7 @@ if (!isset($_SESSION['user_token'])) {
     } else {
         $active = true;
     }
-    
+
     $user_id = intval($_SESSION['session_user']);
     if ($user_id === 0) {
         header("Location: ../login/");
@@ -34,7 +34,6 @@ if (!isset($_SESSION['user_token'])) {
             $iban = $user[0]['iban'];
             $username = $user[0]['username'];
             $profile_image = $user[0]['profile_image'];
-
         }
 
         //prendo l'indirizzo
@@ -51,7 +50,6 @@ if (!isset($_SESSION['user_token'])) {
                 $cap = "";
             }
             $indirizzo = $address[0]['indirizzo'];
-
         }
     }
 }
@@ -122,7 +120,7 @@ $user_token = $_SESSION['user_token'];
                         <h1 class="form-h1">Ciao&nbsp;<strong id="username"><a class="h1"
                                     href="https://bibliontech.it/users/<?php echo $username;?>"><?php echo $username;?></a></strong>!
                         </h1>
-                        <?php 
+                        <?php
                         if (!$active) {
                             echo "
                             <span style='color:red;'>Attiva il tuo account utilizzando la mail che ti abbiamo inviato</span>
@@ -141,12 +139,12 @@ $user_token = $_SESSION['user_token'];
                             <span>Informazioni personali</span><br>
 
 
-                            <input id="name-reg" name="nome" class="form-control" type="text" placeholder="Nome" value="<?php 
+                            <input id="name-reg" name="nome" class="form-control" type="text" placeholder="Nome" value="<?php
                                     echo $name;
                                 ?>">
 
                             <input class="form-control" name="cognome" id="cognome-reg" type="text"
-                                placeholder="Cognome" value="<?php 
+                                placeholder="Cognome" value="<?php
                                     echo $surname;
                                 ?>">
 
@@ -156,7 +154,7 @@ $user_token = $_SESSION['user_token'];
                             <input class="form-control" type="text" placeholder="Username" name="username"
                                 id="username-reg" value="<?php echo $username;?>" required>
 
-                            <input class="form-control" type="text" placeholder="Codice IBAN" value="<?php 
+                            <input class="form-control" type="text" placeholder="Codice IBAN" value="<?php
                                     echo $iban;
                                 ?>" id="iban-reg" name="iban">
 
@@ -166,7 +164,7 @@ $user_token = $_SESSION['user_token'];
 
                             <span><br>Indirizzo</span>
 
-                            <input class="form-control" type="text" placeholder="CAP" value="<?php 
+                            <input class="form-control" type="text" placeholder="CAP" value="<?php
                                 echo $cap;
                                 ?>" name="cap" id="cap-reg">
 
@@ -208,31 +206,31 @@ $user_token = $_SESSION['user_token'];
     <script src="../assets/js/typewriter.js"></script>
     <script src="../assets/js/confirmForm.js"></script>
     <script src="../assets/js/historyReplace.js"></script>
-    <?php 
-    
+    <?php
+
     if (isset($_GET['not'])) {
         if ($_GET['not'] == 'i') {
             echo "<script>document.getElementById('indirizzo-valido').style.display = 'flex';</script>";
             echo "<script>document.getElementById('cap-reg').classList.add('is-invalid');</script>";
             echo "<script>document.getElementById('indirizzo-reg').classList.add('is-invalid');</script>";
-        } 
+        }
         if ($_GET['not'] == 'n') {
             echo "<script>document.getElementById('nome-valido').style.display = 'flex';</script>";
             echo "<script>document.getElementById('name-reg').classList.add('is-invalid');</script>";
             echo "<script>document.getElementById('cognome-reg').classList.add('is-invalid');</script>";
-        } 
+        }
     }
     if (isset($_GET['res']) && $_GET['res'] === 'ok') {
         echo "<script>document.getElementById('success').style.display = 'flex';</script>";
     }
-    
+
 
     ?>
 </body>
 
 </html>
 
-<?php 
+<?php
 
 if (!isset($_SESSION['user_token'])) {
     session_destroy();
@@ -250,45 +248,43 @@ if (!isset($_SESSION['user_token'])) {
 
 
         if ($_FILES['profile_image']['name'] !== "") {
-            
             $file = $_FILES['profile_image'];
             $fileName = basename(htmlspecialchars($_FILES['profile_image']['name']));
             $fileTmp = htmlspecialchars($_FILES['profile_image']['tmp_name']);
             $fileSize = $_FILES['profile_image']['size'];
             $filesError = $_FILES['profile_image']['error'];
             $fileType = $_FILES['profile_image']['type'];
-            $fileExt = explode('.',$_FILES['profile_image']['name']);
+            $fileExt = explode('.', $_FILES['profile_image']['name']);
             $fileActualExt = strtolower(end($fileExt));
             $allowed = array('jpg','jpeg','png');
-            
+
             //controllo che l'immagine abbia un'estensione consentita e poi la carico
-            if(in_array($fileActualExt,$allowed)){
-                if($filesError ===  0){
-                    if($fileSize < 10485760){ 
+            if (in_array($fileActualExt, $allowed)) {
+                if ($filesError ===  0) {
+                    if ($fileSize < 10485760) {
                         $fileDestination = '../assets/img/profile_images/'.$fileName;
-                        move_uploaded_file($fileTmp,$fileDestination);
-                    }else{
-                        
+                        move_uploaded_file($fileTmp, $fileDestination);
+                    } else {
                         echo "<script>alert('File troppo grande');</script>";
                         die();
                     }
-                }else{
+                } else {
                     echo "<script>alert('Errore nel caricamento del file');</script>";
                     die();
                 }
-            }else{
+            } else {
                 echo "<script>alert('Non puoi caricare questo tipo di file');</script>";
                 die();
             }
         } else {
             $fileName = $profile_image;
         }
-        
-        
+
+
         //AGGIORNO/INSERISCO I VALORI
-        
+
         if ($new_username !== $username) {
-            $new_username = check_username($new_username,$username,$user_id);
+            $new_username = check_username($new_username, $username, $user_id);
             $query = "
             UPDATE users SET username = :username, name = :name, surname = :surname, profile_image = :profile_image,iban = :iban, birthdate = :birthdate WHERE
             id = :id
@@ -321,8 +317,7 @@ if (!isset($_SESSION['user_token'])) {
                 echo "<script>alert('Qualcosa è andato storto!')</script>";
                 die();
             }
-        } 
-        else {
+        } else {
             $query = "
             UPDATE users SET username = :username, name = :name, surname = :surname, profile_image = :profile_image, iban = :iban, birthdate = :birthdate WHERE
             id = :id
@@ -336,7 +331,6 @@ if (!isset($_SESSION['user_token'])) {
             $check->bindParam(':birthdate', $birthdate, PDO::PARAM_STR);
             $check->bindParam(':id', $user_id, PDO::PARAM_INT);
             if ($check->execute()) {
-                
                 $query = "
                 UPDATE address SET cap = :cap, indirizzo=:indirizzo WHERE
                 user_id = :id
@@ -356,10 +350,7 @@ if (!isset($_SESSION['user_token'])) {
                 echo "<script>alert('Qualcosa è andato storto!')</script>";
                 die();
             }
-            
         }
-        
-
     }
 
     //eliminazione account
@@ -367,54 +358,54 @@ if (!isset($_SESSION['user_token'])) {
         //verifico se l'utente ha ordini in sospeso
         $sql = 'SELECT * FROM orders WHERE (seller_id = :id OR buyer_id = :buyer_id) AND status != 2';
         $statement = $pdo->prepare($sql);
-        $statement->bindParam(":id",$user_id,PDO::PARAM_INT);
-        $statement->bindParam(":buyer_id",$user_id,PDO::PARAM_INT);
+        $statement->bindParam(":id", $user_id, PDO::PARAM_INT);
+        $statement->bindParam(":buyer_id", $user_id, PDO::PARAM_INT);
         $statement->execute();
         if ($statement->rowCount() === 0) {
-            
+
             //ELIMINO RECENSIONI
             $sql = 'DELETE FROM recensioni WHERE recensore = :recensore OR recensito = :recensito';
             $statement = $pdo->prepare($sql);
-            $statement->bindParam(":recensore",$user_id,PDO::PARAM_INT);
-            $statement->bindParam(":recensito",$user_id,PDO::PARAM_INT);
+            $statement->bindParam(":recensore", $user_id, PDO::PARAM_INT);
+            $statement->bindParam(":recensito", $user_id, PDO::PARAM_INT);
             if (!$statement->execute()) {
                 echo '<script>alert("Abbiamo riscontrato un problema")</script>';
                 die();
             }
-            
+
             //elimino gli ordini
             $sql = 'DELETE FROM orders WHERE seller_id = :seller OR buyer_id = :buyer ';
             $statement = $pdo->prepare($sql);
-            $statement->bindParam(":seller",$user_id,PDO::PARAM_INT);
-            $statement->bindParam(":buyer",$user_id,PDO::PARAM_INT);
+            $statement->bindParam(":seller", $user_id, PDO::PARAM_INT);
+            $statement->bindParam(":buyer", $user_id, PDO::PARAM_INT);
             if (!$statement->execute()) {
                 echo '<script>alert("Abbiamo riscontrato un problema")</script>';
                 die();
             }
-                
-           
+
+
 
             //elimino gli indirizzi
             $sql = 'DELETE FROM address WHERE user_id = :id';
             $statement = $pdo->prepare($sql);
-            $statement->bindParam(":id",$user_id,PDO::PARAM_INT);
+            $statement->bindParam(":id", $user_id, PDO::PARAM_INT);
             if ($statement->execute()) {
 
                 //elimino il saldo
                 $sql = 'DELETE FROM saldo WHERE user_id = :id';
                 $statement = $pdo->prepare($sql);
-                $statement->bindParam(":id",$user_id,PDO::PARAM_INT);
+                $statement->bindParam(":id", $user_id, PDO::PARAM_INT);
                 if ($statement->execute()) {
 
                     //elimino i libri
                     $sql = 'DELETE FROM books WHERE user_id = :id';
                     $statement = $pdo->prepare($sql);
-                    $statement->bindParam(":id",$user_id,PDO::PARAM_INT);
+                    $statement->bindParam(":id", $user_id, PDO::PARAM_INT);
                     if ($statement->execute()) {
                         //elimino l'user ed esco
                         $sql = 'DELETE FROM users WHERE id = :id';
                         $statement = $pdo->prepare($sql);
-                        $statement->bindParam(":id",$user_id,PDO::PARAM_INT);
+                        $statement->bindParam(":id", $user_id, PDO::PARAM_INT);
                         if ($statement->execute()) {
                             removeDir($username);
                             header('location: ../login/logout.php?token='.$_SESSION['user_token']);
@@ -424,18 +415,14 @@ if (!isset($_SESSION['user_token'])) {
                         echo '<script>alert("Abbiamo riscontrato un problema")</script>';
                         die();
                     }
-
                 } else {
                     echo '<script>alert("Abbiamo riscontrato un problema")</script>';
                     die();
                 }
-
-
             } else {
                 echo '<script>alert("Abbiamo riscontrato un problema")</script>';
                 die();
             }
-
         } else {
             echo "<script>alert('Hai ordini in sospeso...')</script>";
             die();
@@ -443,7 +430,8 @@ if (!isset($_SESSION['user_token'])) {
     }
 }
 
-function check_username($newUsername,$oldUsername,$userId) {
+function check_username($newUsername, $oldUsername, $userId)
+{
     global $pdo;
     $query = "
             SELECT * FROM users WHERE username = :username
@@ -460,10 +448,11 @@ function check_username($newUsername,$oldUsername,$userId) {
     }
 }
 
-function removeDir($id) {
+function removeDir($id)
+{
     $dirname = "../users/" .$id. "/";
     array_map('unlink', glob("$dirname/*.*"));
-    
+
     rmdir($dirname);
 }
 

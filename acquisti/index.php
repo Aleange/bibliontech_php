@@ -1,4 +1,4 @@
-<?php 
+<?php
 require_once('../includes/session.php');
 if (!isset($_SESSION['user_token'])) {
     header('location: ../login/');
@@ -97,7 +97,7 @@ if (!isset($_SESSION['user_token'])) {
     <script src="../assets/js/sell.js"></script>
     <script src="../assets/js/typewriter.js"></script>
     <script src="../assets/js/historyReplace.js"></script>
-    <?php 
+    <?php
     if (isset($_GET['res']) && ($_GET['res'] === 'consegnato')) {
         echo "<script>document.getElementById('consegnato').style.display = 'block';</script>";
     }

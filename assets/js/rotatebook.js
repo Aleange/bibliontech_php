@@ -1,11 +1,11 @@
 $(document).ready(function () {
-  var imgs = document.getElementsByTagName("img");
-  var imgSrcs = [];
+  const imgs = document.getElementsByTagName("img");
+  const imgSrcs = [];
 
-  for (var i = 0; i < imgs.length; i++) {
+  for (let i = 0; i < imgs.length; i++) {
     img = imgs[i];
-    var width = img.clientWidth;
-    var height = img.clientHeight;
+    const width = img.clientWidth;
+    const height = img.clientHeight;
     if (width < height) {
       img.setAttribute("style", "transform:rotate(90deg)");
     }

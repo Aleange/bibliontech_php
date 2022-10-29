@@ -1,4 +1,4 @@
-<?php 
+<?php
 
 require_once('../../includes/session.php');
 require_once("../../includes/functions.php");
@@ -122,17 +122,14 @@ if (isset($_SESSION['user_token'])) {
                 <ul class="navbar-nav me-auto">
                     <li class="nav-item"><a class="nav-link" href="https://bibliontech.it/acquista/">Home</a></li>
                     
-                    <?php 
-                
-                if ($logged === 0) {
+                    <?php
 
+                if ($logged === 0) {
                     echo '
                     <li class="nav-item"><a class="nav-link" href="https://bibliontech.it/services/">Come funziona</a></li>
                     </ul><a class="btn nav-btn click" type="button" href="https://bibliontech.it/login/" ><i
                         class="far fa-user"></i></a>
                     ';
-                    
-
                 } else {
                     echo '
                     <li class="nav-item"><a class="nav-link" href="https://bibliontech.it/acquisti/">Acquisti</a></li>
@@ -161,7 +158,7 @@ if (isset($_SESSION['user_token'])) {
                                 data-bs-pause="false" data-bs-keyboard="false" id="carousel-1">
                                 <div class="carousel-inner">
 
-                                    <?php 
+                                    <?php
 
                                     $query = "
                                     SELECT * from images where book_id = :id
@@ -173,7 +170,7 @@ if (isset($_SESSION['user_token'])) {
                                     $res = $check->fetchAll();
                                     $numImages = $check->rowCount();
                                     $copertina = $image;
-                                    
+
                                     if ($image) {
                                         echo "
                                         
@@ -190,7 +187,7 @@ if (isset($_SESSION['user_token'])) {
                                         ";
                                         for ($i = 0;$i < $numImages;$i++) {
                                             $image = $res[$i]['file_name'];
-                                                echo "
+                                            echo "
                                                 <div class='carousel-item'><img class='img-fluid w-100 d-block'
                                                 src='../../assets/img/uploads/$image' onclick='zoomImage($i)'
                                                 alt='Slide Image' name='slide-image'></div>
@@ -206,11 +203,9 @@ if (isset($_SESSION['user_token'])) {
                                                     </div>
                                                 </div>
                                                 <!--FINE DIV PER ZOOM IMMAGINE -->
-                                                "; 
-                                            
+                                                ";
                                         }
                                     } else {
-                                        
                                         for ($i = 0;$i < $numImages;$i++) {
                                             $image = $res[$i]['file_name'];
                                             if ($i === 0) {
@@ -248,11 +243,9 @@ if (isset($_SESSION['user_token'])) {
                                                     </div>
                                                 </div>
                                                 <!--FINE DIV PER ZOOM IMMAGINE -->
-                                                "; 
-                                                
+                                                ";
                                             }
                                         }
-                                            
                                     }
 
                                     ?>
@@ -267,7 +260,7 @@ if (isset($_SESSION['user_token'])) {
                                             class="carousel-control-next-icon"></span><span
                                             class="visually-hidden">Next</span></a></div>
                                 <ol class="carousel-indicators">
-                                    <?php 
+                                    <?php
                                     if (!empty($copertina)) {
                                         $numImages = $numImages + 1;
                                     }
@@ -294,7 +287,7 @@ if (isset($_SESSION['user_token'])) {
 
                                     <span class="bookP-author">di&nbsp;<?php
                                      echo getAutori($book);
-                                     
+
                                      ?></span>
 
 
@@ -307,8 +300,8 @@ if (isset($_SESSION['user_token'])) {
 
                                     <div class="book-rate">
                                         <br><label style='color:black'>Condizioni</label><br>
-                                        <?php 
-                                        
+                                        <?php
+
                                         for ($i = 0; $i < $conditions;$i++) {
                                             echo '
                                             <i class="fas fa-book"></i>
@@ -328,7 +321,7 @@ if (isset($_SESSION['user_token'])) {
                                 <div><span class="book-price"><strong>€&nbsp;</strong><?php echo $price; ?><br></span>
                                 </div>
                                 <div>
-                                    <?php 
+                                    <?php
                                     require_once('../../includes/session.php');
                                     if (isset($_SESSION['user_token'])) {
                                         $buyer_id = intval($_SESSION['session_user']);
@@ -345,15 +338,13 @@ if (isset($_SESSION['user_token'])) {
 
                                         ";
                                         } else {
-                                            
-                                        echo "
+                                            echo "
                                         <form method='post' action='../../site/public/create-checkout-session.php?b=$buyer_id&s=$user_id&id=$book&n=$title&p=$price'>
                                         <button class='btn form-button shadow-none click'
                                             type='submit' name='submit'>Acquista</button></form>
 
                                         ";
                                         }
-
                                     } else {
                                         echo "
                                         

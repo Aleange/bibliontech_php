@@ -1,1 +1,3 @@
-<?php $user = 31; require_once("../user.php"); ?>
+<?php
+
+$user = 31; require_once("../user.php");

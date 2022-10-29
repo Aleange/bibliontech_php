@@ -1,4 +1,4 @@
-<?php 
+<?php
 require_once('../includes/session.php');
 require_once('../includes/functions.php');
 
@@ -9,7 +9,7 @@ if (isset($_POST['confirm'])) {
         header('location: ../index.php');
         die();
     }
-    $password_hash = password_hash($password,PASSWORD_DEFAULT);    
+    $password_hash = password_hash($password, PASSWORD_DEFAULT);
     $email = clean_data($_POST["email"]);
     if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
         echo "<script>document.getElementById('failed').style.display = 'block';</script>";
@@ -21,14 +21,14 @@ if (isset($_POST['confirm'])) {
         SET password = :password
         WHERE email = :email
         ";
-        
+
     $check = $pdo->prepare($query);
     $check->bindParam(':password', $password_hash, PDO::PARAM_STR);
     $check->bindParam(':email', $email, PDO::PARAM_STR);
     $ok = $check->execute();
-    
-    
-    if (!$ok) {  
+
+
+    if (!$ok) {
         header("Location: ../index.php");
         die();
     }

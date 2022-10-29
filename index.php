@@ -1,4 +1,4 @@
-<?php 
+<?php
 require_once('includes/session.php');
 if (!isset($_SESSION['user_token'])) {
     $user_id = 0;
@@ -54,17 +54,14 @@ if (!isset($_SESSION['user_token'])) {
                 <ul class="navbar-nav me-auto">
                     <li class="nav-item"><a class="nav-link" href="https://bibliontech.it/acquista/">Home</a></li>
                     
-                    <?php 
-                
-                if ($user_id === 0) {
+                    <?php
 
+                if ($user_id === 0) {
                     echo '
                     <li class="nav-item"><a class="nav-link" href="services/">Come funziona</a></li>
                     </ul><a class="btn nav-btn click" type="button" href="login/"><i
                         class="far fa-user"></i></a>
                     ';
-                    
-
                 } else {
                     echo '
                     <li class="nav-item"><a class="nav-link" href="acquisti/">Acquisti</a></li>

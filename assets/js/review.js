@@ -1,8 +1,8 @@
 const addReviewOpen = document.getElementById("add-review-open");
 const addReviewClose = document.getElementById("add-review-close");
 const addReviewClose1 = document.getElementById("add-review-close-1");
-var addReview = document.getElementById("add-review");
-var addReview1 = document.getElementById("add-review1");
+const addReview = document.getElementById("add-review");
+const addReview1 = document.getElementById("add-review1");
 
 addReviewOpen.addEventListener("click", () => {
   addReview.style.display = "flex";
@@ -17,39 +17,31 @@ addReviewClose1.addEventListener("click", () => {
 });
 
 function readMore(i) {
-  
-    $("#" + i.toString()).css("-webkit-line-clamp", "100");
-  var buttonReadMore = document.getElementById('readmore' + i.toString());
-  var buttonReadLess = document.getElementById('readless' + i.toString());
-  buttonReadMore.style.display = 'none';
-  buttonReadLess.style.display = 'block';
-
-  }
-
-  
-
-function readLess(i) {
-
-  $("#" + i.toString()).css("-webkit-line-clamp", "5");
-  var buttonReadMore = document.getElementById('readmore' + i.toString());
-  var buttonReadLess = document.getElementById('readless' + i.toString());
-  buttonReadMore.style.display = 'block';
-  buttonReadLess.style.display = 'none';
+  $("#" + i.toString()).css("-webkit-line-clamp", "100");
+  const buttonReadMore = document.getElementById("readmore" + i.toString());
+  const buttonReadLess = document.getElementById("readless" + i.toString());
+  buttonReadMore.style.display = "none";
+  buttonReadLess.style.display = "block";
 }
 
-$(document).ready(function() {
+function readLess(i) {
+  $("#" + i.toString()).css("-webkit-line-clamp", "5");
+  const buttonReadMore = document.getElementById("readmore" + i.toString());
+  const buttonReadLess = document.getElementById("readless" + i.toString());
+  buttonReadMore.style.display = "block";
+  buttonReadLess.style.display = "none";
+}
 
-  $("#recensione").keyup(function() {
-      var input = $(this).val();
+$(document).ready(function () {
+  $("#recensione").keyup(function () {
+    const input = $(this).val();
 
-      if (input.length < 3 || input.length > 600) {
-          $("#recensione").removeClass("is-valid");
-          $("#recensione").addClass("is-invalid");
-
-      } else {
-          $("#recensione").removeClass("is-invalid");
-          $("#recensione").addClass("is-valid");
-      }
-
+    if (input.length < 3 || input.length > 600) {
+      $("#recensione").removeClass("is-valid");
+      $("#recensione").addClass("is-invalid");
+    } else {
+      $("#recensione").removeClass("is-invalid");
+      $("#recensione").addClass("is-valid");
+    }
   });
 });
