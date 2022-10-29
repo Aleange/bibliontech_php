@@ -2,7 +2,7 @@ $(document).ready(function() {
 
     $("#nome").keyup(function() {
         var input = $(this).val();
-        console.log(input);
+        
         if (input.length < 3 || input.length > 100) {
             $("#nome").removeClass("is-valid");
             $("#nome").addClass("is-invalid");

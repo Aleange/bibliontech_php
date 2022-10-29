@@ -8,7 +8,7 @@ function regConfirm() {
 	var ibanReg = document.getElementById('iban-reg').value;
 	var capReg = document.getElementById('cap-reg').value;
 	var indirizzoReg = document.getElementById('indirizzo-reg').value;
-	console.log("confirm");
+	
 	var pattern;
 	var element;
 	var elementToShow;
@@ -73,7 +73,7 @@ function regConfirm() {
 	//check cap
 	element = document.getElementById("cap-reg");
 	pattern = pattern = /^\d{5}$/;
-	console.log(element);
+	
 	if (!capReg) {
 		document.getElementById("cap-reg").value = 0;
 	} else {

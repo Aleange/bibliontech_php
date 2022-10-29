@@ -1,7 +1,7 @@
 function getInfo() {
     var isbn = document.getElementById("isbn").value;
     if (isbn !== "") {
-        console.log(isbn);
+        
         var xhr = new XMLHttpRequest();
         var url = "https://www.googleapis.com/books/v1/volumes?q=isbn:"+isbn+"+&key=AIzaSyCa9kzvRulB3VeTXHN7iV3N3Eg5v_JtXFs";
         xhr.open("GET",url,true);
@@ -11,7 +11,7 @@ function getInfo() {
 
                 var response = JSON.parse(xhr.responseText);
         
-                console.log(response);
+                
                 
                 try {
                     let arrayCategorie = response["items"][0]["volumeInfo"]["categories"];  
