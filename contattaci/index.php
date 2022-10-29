@@ -1,4 +1,4 @@
-<?php 
+<?php
 
 require_once('../includes/session.php');
 if (!isset($_SESSION['user_token'])) {
@@ -49,18 +49,15 @@ if (!isset($_SESSION['user_token'])) {
             <div class="collapse navbar-collapse" id="navcol-1">
                 <ul class="navbar-nav me-auto">
                     <li class="nav-item"><a class="nav-link" href="https://bibliontech.it/acquista/">Home</a></li>
-                    <?php 
-                
-                if ($logged === 0) {
+                    <?php
 
+                if ($logged === 0) {
                     echo '
                     <li class="nav-item"><a class="nav-link" href="https://bibliontech.it/services/">Come funziona</a></li>
                     </ul><button class="btn nav-btn click" type="button" id="goToLogin"><a href="https://bibliontech.it/login/" style="color:white !important;"><i
                         class="far fa-user"></i></a></button>
                         
                     ';
-                    
-
                 } else {
                     echo '
                     <li class="nav-item"><a class="nav-link" href="https://bibliontech.it/acquisti/">Acquisti</a></li>
@@ -132,13 +129,13 @@ if (!isset($_SESSION['user_token'])) {
 </body>
 
 </html>
-<?php 
+<?php
 require_once('../includes/functions.php');
 if (isset($_POST['invia'])) {
     $email = $_POST['email'];
     $nome = $_POST['nome'];
     $testo = $_POST['testo'];
-    
+
     if (!isset($_POST['email']) || empty($email) || !isset($_POST['nome']) || empty($nome) || !isset($_POST['testo']) || empty($testo)) {
         echo "<script>document.getElementById('compila').style.display = 'block';</script>";
         die();
@@ -150,58 +147,59 @@ if (isset($_POST['invia'])) {
     }
     $nome = clean_data($nome);
     $nome = filter_var($nome, FILTER_SANITIZE_STRING);
-    
+
     $testo = clean_data($testo);
     $testo = filter_var($testo, FILTER_SANITIZE_STRING);
-    
+
     //invio email a postmaster da postmaster con nome, indirizzo email e testo inseriti dall'utente
-    sendMail($nome,$email,$testo);
+    sendMail($nome, $email, $testo);
 }
 
-function sendMail($name,$mail,$text) {
+function sendMail($name, $mail, $text)
+{
     error_reporting(E_ALL);
-    
+
     // Genera un boundary
     $mail_boundary = "=_NextPart_" . md5(uniqid(time()));
-    
+
     $to = "postmaster@bibliontech.it";
     $subject = "Ricezione Email";
     $sender = "Nuova Email Ricevuta < postmaster@bibliontech.it >";
-    
-    
+
+
     $headers = "From: $sender\n";
     $headers .= "MIME-Version: 1.0\n";
     $headers .= "Content-Type: multipart/alternative;\n\tboundary=\"$mail_boundary\"\n";
     $headers .= "X-Mailer: PHP " . phpversion();
-     
+
     // Corpi del messaggio nei due formati testo e HTML
     $text_msg = "messaggio in formato testo";
     $html_msg = "<b>messaggio</b> in formato <p><a href='http://www.aruba.it'>html</a><br><img src=\"http://hosting.aruba.it/image_top/top_01.gif\" border=\"0\"></p>";
-     
+
     // Costruisci il corpo del messaggio da inviare
     $msg = "This is a multi-part message in MIME format.\n\n";
     $msg .= "--$mail_boundary\n";
     $msg .= "Content-Type: text/plain; charset=\"iso-8859-1\"\n";
     $msg .= "Content-Transfer-Encoding: 8bit\n\n";
     $msg .= "Nuovo messaggio ricevuto! L'utente $name con indirizzo mail $mail ha scritto: $text";  // aggiungi il messaggio in formato text
-     
+
     $msg .= "\n--$mail_boundary\n";
     $msg .= "Content-Type: text/html; charset=\"iso-8859-1\"\n";
     $msg .= "Content-Transfer-Encoding: 8bit\n\n";
     $msg .= "<h2>Nuovo messaggio ricevuto!</h2> <p>L'utente $name con indirizzo mail <a href='mailto:$mail'>$mail</a> ha scritto: <br><strong>$text</strong></p>";  // aggiungi il messaggio in formato HTML
-     
+
     // Boundary di terminazione multipart/alternative
     $msg .= "\n--$mail_boundary--\n";
-     
+
     // Imposta il Return-Path (funziona solo su hosting Windows)
     ini_set("sendmail_from", $sender);
-     
+
     // Invia il messaggio, il quinto parametro "-f$sender" imposta il Return-Path su hosting Linux
-    if (mail($to, $subject, $msg, $headers, "-f$sender")) { 
+    if (mail($to, $subject, $msg, $headers, "-f$sender")) {
         echo "<script>document.getElementById('mail-request').style.display = 'none'</script>";
         echo "<script>document.getElementById('email-success').style.display = 'block'</script>";
         die();
-    } else { 
+    } else {
         echo "<script>document.getElementById('mail-request').style.display = 'none'</script>";
         echo "<script>document.getElementById('email-failed').style.display = 'block'</script>";
         die();

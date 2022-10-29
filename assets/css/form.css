@@ -84,7 +84,7 @@
 }
 
 .external-form-container {
-  background-color: #F7F9F9;
+  background-color: #f7f9f9;
   border-radius: 1.5rem;
   box-shadow: 0 14px 28px rgba(0, 0, 0, 0.1), 0 10px 10px rgba(0, 0, 0, 0.1);
   position: relative;
@@ -94,7 +94,8 @@
   min-height: 480px;
 }
 
-#reg-link, #acc-link {
+#reg-link,
+#acc-link {
   font-size: 15px;
 }
 
@@ -158,15 +159,17 @@
   transform: translateX(100%);
   opacity: 1;
   z-index: 5;
-  animation: show .6s;
+  animation: show 0.6s;
 }
 
 @keyframes show {
-  0%, 49.99% {
+  0%,
+  49.99% {
     opacity: 0;
     z-index: 1;
   }
-  50%, 100% {
+  50%,
+  100% {
     opacity: 1;
     z-index: 5;
   }
@@ -307,7 +310,8 @@
 }
 
 @media screen and (min-width: 992px) {
-  #reg-link, #acc-link {
+  #reg-link,
+  #acc-link {
     display: none;
   }
 }
@@ -331,18 +335,19 @@
   color: white;
 }
 
-.star-rate, .book-rate {
+.star-rate,
+.book-rate {
   color: #f8d000;
   text-align: center;
   width: 100%;
 }
 
 .book-rate {
-    color: var(--bs-orange);
+  color: var(--bs-orange);
 }
 
-
-.star-rate i, .book-rate i {
+.star-rate i,
+.book-rate i {
   margin: 10px 5px;
 }
 

@@ -1,4 +1,4 @@
-<?php 
+<?php
 require_once('../includes/session.php');
 require_once('../includes/functions.php');
 $num_per_page = 20;
@@ -79,17 +79,14 @@ if (isset($_SESSION['user_token'])) {
                     <li class="nav-item"><a class="nav-link active" href="https://bibliontech.it/acquista/">Home</a>
                     </li>
 
-                    <?php 
-                
-                if ($logged === 0) {
+                    <?php
 
+                if ($logged === 0) {
                     echo '
                     <li class="nav-item"><a class="nav-link" href="../services/">Come funziona</a></li>
                     </ul><a class="btn nav-btn click" type="button" href="../login/" ><i
                         class="far fa-user"></i></a>
                     ';
-                    
-
                 } else {
                     echo '
                     <li class="nav-item"><a class="nav-link" href="../acquisti/">Acquisti</a></li>
@@ -127,10 +124,10 @@ if (isset($_SESSION['user_token'])) {
                 <div class="row">
                     <div class="col">
                         <div class="books-container" id="nosearch">
-                            <?php 
+                            <?php
                             $total_records = getTotalRecords();
                             getBooks($start_from);
-                            
+
 
                         ?>
                         </div>
@@ -145,22 +142,20 @@ if (isset($_SESSION['user_token'])) {
                 <div class="row">
                     <div class="col">
                         <div class="d-flex justify-content-center align-items-center">
-                            <?php 
-                            
+                            <?php
+
                             for ($i = $page -1; $i <= $page+1; $i++) {
                                 if ($i === $page) {
                                     echo "<a href='index.php?page=$i'><button
                                 class='btn page-cnt click shadow-none active-page' type='button'>
                                 $i</button></a>";
-                                } else if ($i > 0) {
+                                } elseif ($i > 0) {
                                     if ($total_records > (($i-1)*20)) {
                                         echo "<a href='index.php?page=$i'><button
                                 class='btn page-cnt click shadow-none' type='button'>
                                 $i</button></a>";
                                     }
-                                    
                                 }
-                                
                             }
 
                             ?>
@@ -182,7 +177,7 @@ if (isset($_SESSION['user_token'])) {
     <script src="../assets/js/typewriter.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <script src="../assets/js/historyReplace.js"></script>
-    <?php 
+    <?php
     if (isset($_GET['autore'])) {
         $autore = clean_data($_GET['autore']);
         echo "<script>var autore = '$autore'</script>";

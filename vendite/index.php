@@ -295,8 +295,8 @@ if (!isset($_SESSION['user_token'])) {
                             <div class="small-form-container">
 
                                 <!--FORM PER RICHIEDERE IL SALDO-->
-                                <?php 
-                                
+                                <?php
+
                                 if (intval($saldo) < 15) {
                                     echo '<form>';
                                 } else {
@@ -338,8 +338,8 @@ if (!isset($_SESSION['user_token'])) {
 
                                     
                                 </div>
-                                <?php 
-                                    
+                                <?php
+
                                     if (intval($saldo) < 15) {
                                         echo '
                                         <button class="btn form-button click shadow-none" type="button"
@@ -370,7 +370,7 @@ if (!isset($_SESSION['user_token'])) {
 
                             require_once '../includes/functions.php';
                             getBooksSold($user_id);
-                            
+
                             ?>
 
 
@@ -411,7 +411,7 @@ if (!isset($_SESSION['user_token'])) {
 
     }
     </script>
-    <?php 
+    <?php
     if (isset($_GET['res']) && ($_GET['res'] === 'spedito')) {
         echo "<script>document.getElementById('spedito').style.display = 'block';</script>";
     }
@@ -436,66 +436,66 @@ if (!isset($_SESSION['user_token'])) {
     header("Location: ../login/");
     die();
 } else {
-    //ELIMINAZIONE LIBRO 
+    //ELIMINAZIONE LIBRO
     if (isset($_POST['elimina'])) {
-        
-        
+
+
         //verifichiamo che i parametri post siano presenti e corretti
         if (!isset($_POST['elimina']) || !isset($_POST['libro-eliminato'])
             || $_POST['elimina'] !== 'si' || intval($_POST['libro-eliminato']) === 0) {
             header('location: index.php');
             die();
         }
-        
+
         $book_id = intval($_POST['libro-eliminato']);
         if ($user_id === 0) {
             header('location: ../login/');
             die();
         }
-        
+
         //controllo che l'user loggato sia effettivamente il proprietario del libro
         $query = "SELECT * FROM `books` WHERE `id`= :book_id AND user_id = :user_id";
-        
+
         $stmt = $pdo->prepare($query);
-        
+
         $stmt->bindParam(':book_id', $book_id, PDO::PARAM_INT);
         $stmt->bindParam(':user_id', $user_id, PDO::PARAM_INT);
         $stmt->execute();
-        
+
         if ($stmt->rowCount() !== 1) {
             header('location: index.php');
             die();
         }
-        
+
         //controllo che il libro non sia in un ordine non completato
         $query = "SELECT * FROM `orders` WHERE `book_id`= :book_id AND `seller_id` = :user_id AND `status` != 2";
-        
+
         $stmt = $pdo->prepare($query);
-        
+
         $stmt->bindParam(':book_id', $book_id, PDO::PARAM_INT);
         $stmt->bindParam(':user_id', $user_id, PDO::PARAM_INT);
         $stmt->execute();
-        
+
         if ($stmt->rowCount() > 0) {
             header('location: index.php?res=errore');
             die();
         }
-        
+
         //elimino ANCHE GLI AUTORI
         $query = "DELETE FROM `autori` WHERE `book_id`= :book_id";
-        
+
         $stmt = $pdo->prepare($query);
-        
+
         $stmt->bindParam(':book_id', $book_id, PDO::PARAM_INT);
         if (!$stmt->execute()) {
             header('location: index.php');
             die();
         }
-        
+
         $query = "DELETE FROM `books` WHERE `id`= :book_id AND user_id = :user_id";
-        
+
         $stmt = $pdo->prepare($query);
-        
+
         $stmt->bindParam(':book_id', $book_id, PDO::PARAM_INT);
         $stmt->bindParam(':user_id', $user_id, PDO::PARAM_INT);
         if (!$stmt->execute()) {
@@ -505,13 +505,12 @@ if (!isset($_SESSION['user_token'])) {
         removeDir($book_id);
         header('location: index.php?res=eliminato');
         die();
-        
     }
-            
-    
-    
+
+
+
     //NUOVO LIBRO
-    
+
     if (isset($_POST['sell-submit'])) {
         $user_id = intval($_SESSION['session_user']);
         if ($user_id === 0) {
@@ -520,12 +519,12 @@ if (!isset($_SESSION['user_token'])) {
         }
         $titolo = clean_data($_POST['titolo']);
         $titolo = filter_var($titolo, FILTER_SANITIZE_STRING);
-        
+
         $autori = clean_data($_POST['autore']);
         $autori = filter_var($autori, FILTER_SANITIZE_STRING);
-        
-        $prezzo = filter_var($_POST['prezzo'], FILTER_SANITIZE_NUMBER_FLOAT,FILTER_FLAG_ALLOW_FRACTION);
-        
+
+        $prezzo = filter_var($_POST['prezzo'], FILTER_SANITIZE_NUMBER_FLOAT, FILTER_FLAG_ALLOW_FRACTION);
+
         if (isset($_POST['isbn'])) {
             $isbn = clean_data($_POST['isbn']);
         } else {
@@ -533,10 +532,10 @@ if (!isset($_SESSION['user_token'])) {
         }
         $condizioni = filter_var($_POST['condizioni'], FILTER_SANITIZE_NUMBER_INT);
         $book_uniqid = uniqid();
-        
+
         $descrizione = clean_data($_POST['descrizione']);
         $descrizione = filter_var($descrizione, FILTER_SANITIZE_STRING);
-        
+
         $foto = $_POST['foto'];
         $files = $_POST['files'];
         if (empty($condizioni)) {
@@ -549,7 +548,7 @@ if (!isset($_SESSION['user_token'])) {
             header('refresh: 0');
             die();
         }
-        
+
         $allowType = array('jpg', 'png', 'jpeg', 'gif');
         $fileNames = array_filter($_FILES['files']['name']);
         $names = array();
@@ -569,8 +568,8 @@ if (!isset($_SESSION['user_token'])) {
                 }
             }
         }
-                
-                
+
+
 
         if (empty($titolo) || empty($prezzo) || empty($autori) || empty($condizioni) || strlen($descrizione) > 500) {
             echo '<script type="text/javascript">
@@ -584,7 +583,7 @@ if (!isset($_SESSION['user_token'])) {
             header('refresh: 0');
             die();
         }
-        
+
 
         if (empty($foto)) {
             $sql = "INSERT INTO `books` (`user_id`,`uniqid`,`title`,`autori`, `price`, `isbn`, `conditions`,`description`)
@@ -599,7 +598,6 @@ if (!isset($_SESSION['user_token'])) {
                 $condizioni,
                 $descrizione]);
         } else {
-
             $sql = "INSERT INTO `books` (`user_id`,`uniqid`,`image`, `title`,`autori`, `price`, `isbn`, `conditions`,`description`)
             VALUES (?,?,?,?,?,?,?,?,?)";
             $stmt = $pdo->prepare($sql);
@@ -628,15 +626,15 @@ if (!isset($_SESSION['user_token'])) {
         $result = $con->query($sql);
         $row = $result->fetch_assoc();
         $book_id = $row['id'];
-        
+
         //inserisco gli autori
         $arrayAutori = explode(",", $autori);
         for ($i = 0;$i < count($arrayAutori);$i++) {
             $sqlAutori = "INSERT INTO `autori` (`book_id`,`nome`)
             VALUES (:book_id,:nome)";
             $stmtAutori = $pdo->prepare($sqlAutori);
-            $stmtAutori->bindParam(":book_id",$book_id,PDO::PARAM_INT);
-            $stmtAutori->bindParam(":nome",clean_data($arrayAutori[$i]),PDO::PARAM_STR);
+            $stmtAutori->bindParam(":book_id", $book_id, PDO::PARAM_INT);
+            $stmtAutori->bindParam(":nome", clean_data($arrayAutori[$i]), PDO::PARAM_STR);
             $stmtAutori->execute();
         }
 
@@ -646,11 +644,11 @@ if (!isset($_SESSION['user_token'])) {
         $allowTypes = array('jpg', 'png', 'jpeg', 'gif');
 
         $statusMsg = $errorMsg = $insertValuesSQL = $errorUpload = $errorUploadType = '';
-        
-        
+
+
         $fileNames = array_filter($_FILES['files']['name']);
-        
-        
+
+
 
         $names_to_insert = array();
 
@@ -707,7 +705,6 @@ if (!isset($_SESSION['user_token'])) {
             $statusMsg = 'Please select a file to upload.';
         }
         echo "<script>alert($statusMsg);</script>";
-
     }
     //FINE NUOVO LIBRO
 
@@ -768,10 +765,9 @@ if (!isset($_SESSION['user_token'])) {
                     die(); //
                 }
                 //parte di invio mail
-                sendMail($user_id,$saldo,$iban);
+                sendMail($user_id, $saldo, $iban);
                 header("location: index.php?res=saldo");
                 die();
-
             }
         }
     }
@@ -789,60 +785,62 @@ function createDir($id)
     $testo = '<?php $book = ' . $id . '; require_once("../book.php"); ?>';
 
     if (fwrite($fp, $testo) === false) {
-    exit;
+        exit;
     }
     fclose($fp);
 }
 
-function removeDir($id) {
+function removeDir($id)
+{
     $dirname = "../books/" .$id. "/";
     array_map('unlink', glob("$dirname/*.*"));
-    
+
     rmdir($dirname);
 }
 
-function sendMail($user,$user_saldo,$user_iban) {
+function sendMail($user, $user_saldo, $user_iban)
+{
     error_reporting(E_ALL);
 
     // Genera un boundary
     $mail_boundary = "=_NextPart_" . md5(uniqid(time()));
-    
+
     $to = "angeleri.0206@gmail.com";
     $subject = "Saldo richiesto";
     $sender = "BiblionTech < postmaster@bibliontech.it >";
-    
-    
+
+
     $headers = "From: $sender\n";
     $headers .= "MIME-Version: 1.0\n";
     $headers .= "Content-Type: multipart/alternative;\n\tboundary=\"$mail_boundary\"\n";
     $headers .= "X-Mailer: PHP " . phpversion();
-     
+
     // Corpi del messaggio nei due formati testo e HTML
     $text_msg = "messaggio in formato testo";
     $html_msg = "<b>messaggio</b> in formato <p><a href='http://www.aruba.it'>html</a><br><img src=\"http://hosting.aruba.it/image_top/top_01.gif\" border=\"0\"></p>";
-     
+
     // Costruisci il corpo del messaggio da inviare
     $msg = "This is a multi-part message in MIME format.\n\n";
     $msg .= "--$mail_boundary\n";
     $msg .= "Content-Type: text/plain; charset=\"iso-8859-1\"\n";
     $msg .= "Content-Transfer-Encoding: 8bit\n\n";
     $msg .= "Saldo richiesto. L'utente $user ha richiesto la riscossione del saldo per un importo pari a $user_saldo. Il suo IBAN è $user_iban. Esegui le verifiche prima dell' invio del denaro. ";  // aggiungi il messaggio in formato text
-     
+
     $msg .= "\n--$mail_boundary\n";
     $msg .= "Content-Type: text/html; charset=\"iso-8859-1\"\n";
     $msg .= "Content-Transfer-Encoding: 8bit\n\n";
     $msg .= "<h2>Saldo richiesto</h2><p>L'utente <strong>$user</strong> ha richiesto la riscossione del saldo per un importo pari a <strong>$user_saldo</strong>. Il suo IBAN è <strong>$user_iban</strong>. Esegui le verifiche prima dell' invio del denaro.</p><br><p> Grazie, lo staff di BiblionTech</p>";   // aggiungi il messaggio in formato HTML
-     
+
     // Boundary di terminazione multipart/alternative
     $msg .= "\n--$mail_boundary--\n";
-     
+
     // Imposta il Return-Path (funziona solo su hosting Windows)
     ini_set("sendmail_from", $sender);
-     
+
     // Invia il messaggio, il quinto parametro "-f$sender" imposta il Return-Path su hosting Linux
-    if (mail($to, $subject, $msg, $headers, "-f$sender")) { 
+    if (mail($to, $subject, $msg, $headers, "-f$sender")) {
         return true;
-    } else { 
+    } else {
         return false;
     }
 }

@@ -1,4 +1,4 @@
-<?php 
+<?php
 require_once('../../includes/functions.php');
 require_once('../../includes/session.php');
 if (isset($_SESSION['user_token'])) {
@@ -10,7 +10,6 @@ if (isset($_SESSION['user_token'])) {
     }
     $logged = 1;
     $usernameLoggato = clean_data($_SESSION['session_username']);
-
 } else {
     $logged = 0;
 }
@@ -84,17 +83,14 @@ if ($profile_image !== 'https://icon-library.com/images/default-user-icon/defaul
                 <ul class="navbar-nav me-auto">
                     <li class="nav-item"><a class="nav-link" href="https://bibliontech.it/acquista/">Home</a></li>
                     
-                    <?php 
-                
-                if ($logged === 0) {
+                    <?php
 
+                if ($logged === 0) {
                     echo '
                     <li class="nav-item"><a class="nav-link" href="https://bibliontech.it/services/">Come funziona</a></li>
                     </ul><a href="../../login" class="btn nav-btn click" type="button" ><i
                         class="far fa-user"></i></a>
                     ';
-                    
-
                 } else {
                     echo '
                     <li class="nav-item"><a class="nav-link" href="https://bibliontech.it/acquisti/">Acquisti</a></li>
@@ -169,9 +165,9 @@ if ($profile_image !== 'https://icon-library.com/images/default-user-icon/defaul
                                 <h2>Recensioni</h2>
                             </div>
                             <div class="d-lg-flex justify-content-lg-center">
-                                <?php 
-                            
-                            
+                                <?php
+
+
                             if (isset($_SESSION['user_token']) && $username !== $usernameLoggato) {
                                 echo '
                                 
@@ -304,7 +300,7 @@ if ($profile_image !== 'https://icon-library.com/images/default-user-icon/defaul
 
 </html>
 
-<?php 
+<?php
 
 
 if (isset($_POST['pubblica'])) {
@@ -318,7 +314,7 @@ if (isset($_POST['pubblica'])) {
             header('Location: ../../login/');
             die();
         }
-        
+
         $query5 = "
         SELECT * from orders where buyer_id = :recensore and seller_id = :recensito
         ";
@@ -327,14 +323,14 @@ if (isset($_POST['pubblica'])) {
         $check5->bindParam(':recensito', $user, PDO::PARAM_INT);
         $check5->execute();
         $res = $check5->rowCount();
-        
+
 
         if ($res === 0) {
             echo "<script>document.getElementById('failed').style.display = 'block';</script>";
             echo "<script>document.getElementById('add-review').style.display = 'flex';</script>";
             die();
         } else {
-            
+
             //controllo che non abbia già scritto una recensione
             $query5 = "
             SELECT * from recensioni where recensore = :recensore and recensito = :recensito
@@ -355,7 +351,7 @@ if (isset($_POST['pubblica'])) {
                 } else {
                     $valutazione = intval($_POST['valutazione']);
                 }
-                
+
                 if ($valutazione === 0 || $valutazione < 1 || $valutazione > 5 || empty($valutazione)) {
                     echo "<script>document.getElementById('rating$valutazione').classList.add('is-invalid');</script>";
                     die();
@@ -374,16 +370,13 @@ if (isset($_POST['pubblica'])) {
                 $check5->bindParam(':recensito', $user, PDO::PARAM_INT);
                 $check5->bindParam(':testo', $testo, PDO::PARAM_STR);
                 $check5->bindParam(':valutazione', $valutazione, PDO::PARAM_INT);
-                
+
                 if ($check5->execute()) {
                     header("Refresh:0");
                     die();
                 } else {
                     die("Error occured");
                 }
-                
-                
-
             }
         }
     }
@@ -403,17 +396,17 @@ if (isset($_POST['delete'])) {
         header("Location: index.php");
         die();
     }
-    
+
     $id_recensione = $_POST['delete'];
     $id_recensione = intval($id_recensione);
     if ($id_recensione === 0) {
         header("Location: index.php");
         die();
-    } 
+    }
     //controllo che l'utente loggato abbia scritto una recensione per l'utente in questione
     //e che abbia questo id
-    
-     $query5 = "
+
+    $query5 = "
     SELECT * from recensioni where recensore = :recensore and recensito = :recensito and id = :id
     ";
     $check5 = $pdo->prepare($query5);
@@ -427,7 +420,7 @@ if (isset($_POST['delete'])) {
         die();
     }
     //se è presente la elimino
-     $query5 = "
+    $query5 = "
     delete from recensioni where recensore = :recensore and recensito = :recensito and id = :id
     ";
     $check5 = $pdo->prepare($query5);
@@ -437,8 +430,6 @@ if (isset($_POST['delete'])) {
     $check5->execute();
     header("refresh: 0");
     die();
-    
-    
 }
 
 ?>

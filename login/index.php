@@ -1,4 +1,4 @@
-<?php 
+<?php
 require_once('../includes/session.php');
 if (isset($_SESSION['user_token'])) {
     header('Location: ../my_account/');
@@ -147,7 +147,7 @@ if (isset($_SESSION['user_token'])) {
 
 </html>
 
-<?php 
+<?php
 
 require_once('../includes/functions.php');
 
@@ -172,17 +172,17 @@ if (isset($_POST['submit-reg'])) {
         FROM users
         WHERE email = :email
     ";
-    
+
     $check = $pdo->prepare($query);
     $check1 = $pdo->prepare($query1);
     $check->bindParam(':username', $username, PDO::PARAM_STR);
-    $check1->bindParam(':email', $email,PDO::PARAM_STR);
+    $check1->bindParam(':email', $email, PDO::PARAM_STR);
     $check->execute();
     $check1->execute();
 
     $user = $check->fetchAll(PDO::FETCH_ASSOC);
     $mail = $check1->fetchAll(PDO::FETCH_ASSOC);
-        
+
     if (count($user) > 0) {
         echo '<script type="text/javascript">
     container.classList.add("right-panel-active");
@@ -190,9 +190,9 @@ if (isset($_POST['submit-reg'])) {
     document.getElementById("username-reg").classList.add("is-invalid");
     document.getElementById("username-reg").classList.add("border-red");
     </script>';
-    echo '<script>container.classList.add("right-panel-active");</script>';
-    die();
-    } elseif(count($mail) > 0) {
+        echo '<script>container.classList.add("right-panel-active");</script>';
+        die();
+    } elseif (count($mail) > 0) {
         echo '<script type="text/javascript">
         container.classList.add("right-panel-active");
     document.getElementById("email-no-valid").style.display = "block";
@@ -200,21 +200,21 @@ if (isset($_POST['submit-reg'])) {
     document.getElementById("email-reg").classList.add("border-red");
 
     </script>';
-    echo '<script>container.classList.add("right-panel-active");</script>';
-    die();
+        echo '<script>container.classList.add("right-panel-active");</script>';
+        die();
     } else {
         $profileImageDefault = "https://icon-library.com/images/default-user-icon/default-user-icon-8.jpg";
-        
+
         $query = "
             INSERT INTO users ( username, birthdate, email,profile_image, password, activation_code)
             VALUES (:username,:birthdate,:email, :profile_image, :password, :activation_code)
         ";
-    
+
         $check = $pdo->prepare($query);
         $check->bindParam(':username', $username, PDO::PARAM_STR);
         $check->bindParam(':birthdate', $birthdate, PDO::PARAM_STR);
         $check->bindParam(':email', $email, PDO::PARAM_STR);
-        $check->bindParam(':profile_image',$profileImageDefault,PDO::PARAM_STR);
+        $check->bindParam(':profile_image', $profileImageDefault, PDO::PARAM_STR);
         $check->bindParam(':password', $password_hash, PDO::PARAM_STR);
         $code = uniqid();
         $check->bindParam(':activation_code', $code, PDO::PARAM_STR);
@@ -233,7 +233,7 @@ if (isset($_POST['submit-reg'])) {
             INSERT INTO address ( user_id, cap, indirizzo)
             VALUES (:user_id, 0, '')
         ";
-    
+
         $check31 = $pdo->prepare($query31);
         $check31->bindParam(':user_id', $newId, PDO::PARAM_STR);
         $check31->execute();
@@ -242,17 +242,17 @@ if (isset($_POST['submit-reg'])) {
             INSERT INTO saldo (user_id,lordo,commissione,netto,ricevuto)
             VALUES (:user_id,0,0,0,0)
         ";
-    
+
         $check41 = $pdo->prepare($query41);
         $check41->bindParam(':user_id', $newId, PDO::PARAM_STR);
         $check41->execute();
 
         //creo la directory per l'user
-        createDir($username,$newId);
+        createDir($username, $newId);
         //error_reporting(E_ALL);
 
         //CREO LA SESSIONE
-        
+
         session_regenerate_id();
         $_SESSION['session_id'] = session_id();
         $userToken = bin2hex(openssl_random_pseudo_bytes(24));
@@ -262,117 +262,117 @@ if (isset($_POST['submit-reg'])) {
         $_SESSION['session_username'] = $username;
         $_SESSION['session_email'] = $email;
         $_SESSION['active'] = false;
-        $mailSent = sendMail($email,$code,$username);
+        $mailSent = sendMail($email, $code, $username);
         header("Location: https://bibliontech.it/my_account/");
         die();
-        
-        }
     }
+}
 
     /*ACTION LOGIN*/
 
     if (isset($_POST['submit-login'])) {
         $username = $_POST['username-log'] ?? '';
         $password = $_POST['password-log'] ?? '';
-        
-    
-    if (empty($username) || empty($password)) {
-        echo '<script type="text/javascript">
+
+
+        if (empty($username) || empty($password)) {
+            echo '<script type="text/javascript">
         document.getElementById("failed").style.display = "block";
         </script>';
-        die();
-    } else {
-        $query = "
+            die();
+        } else {
+            $query = "
             SELECT id,username, password,activation_code
             FROM users
             WHERE username = :username
         ";
-        
-        $check = $pdo->prepare($query);
-        $check->bindParam(':username', $username, PDO::PARAM_STR);
-        $check->execute();
-        
-        
-        $user = $check->fetch(PDO::FETCH_ASSOC);
-        
-        $activation_code = $user['activation_code'];
 
-        if ($activation_code !== 'activated') {
-            $active = false;
-        } else {
-            $active = true;
-        }
-        
-        if (!$user || password_verify($password, $user['password']) === false) {
-            echo '<script type="text/javascript">
+            $check = $pdo->prepare($query);
+            $check->bindParam(':username', $username, PDO::PARAM_STR);
+            $check->execute();
+
+
+            $user = $check->fetch(PDO::FETCH_ASSOC);
+
+            $activation_code = $user['activation_code'];
+
+            if ($activation_code !== 'activated') {
+                $active = false;
+            } else {
+                $active = true;
+            }
+
+            if (!$user || password_verify($password, $user['password']) === false) {
+                echo '<script type="text/javascript">
         document.getElementById("failed").style.display = "block";
         </script>';
-        die();
-        } else {
-            $_SESSION['session_id'] = session_id();
-            $userToken = bin2hex(openssl_random_pseudo_bytes(24));
-            //assign the token to a session variable.
-            $_SESSION['user_token'] = $userToken;
-            $_SESSION['session_user'] = $user['id'];
-            $_SESSION['session_username'] = $user['username'];
-            $_SESSION['session_email'] = $user['email'];
-            $_SESSION['active'] = $active;
-            header('location: ../my_account/');
-            die();
+                die();
+            } else {
+                $_SESSION['session_id'] = session_id();
+                $userToken = bin2hex(openssl_random_pseudo_bytes(24));
+                //assign the token to a session variable.
+                $_SESSION['user_token'] = $userToken;
+                $_SESSION['session_user'] = $user['id'];
+                $_SESSION['session_username'] = $user['username'];
+                $_SESSION['session_email'] = $user['email'];
+                $_SESSION['active'] = $active;
+                header('location: ../my_account/');
+                die();
+            }
         }
     }
-    
-    }
 
-function createDir($userName,$id) {
+function createDir($userName, $id)
+{
     $filename = "../users/".$userName."/";
-    mkdir($filename,0700);
+    mkdir($filename, 0700);
     if (!$fp = fopen("../users/".$userName."/index.php", "w+")) {
         exit;
     }
     $testo = '<?php $user = '.$id.'; require_once("../user.php"); ?>';
 
-    if (fwrite($fp,$testo) === FALSE) {
-    exit;
+    if (fwrite($fp, $testo) === false) {
+        exit;
     }
     fclose($fp);
 }
 
-function sendMail($emailX,$codeX,$usernameX) {
+function sendMail($emailX, $codeX, $usernameX)
+{
     error_reporting(E_ALL);
-    
+
     // Genera un boundary
     $mail_boundary = "=_NextPart_" . md5(uniqid(time()));
-    
+
     $to = $emailX;
     $subject = "Attivazione account";
     $sender = "BiblionTech < postmaster@bibliontech.it >";
-    
-    
+
+
     $headers = "From: $sender\n";
     $headers .= "MIME-Version: 1.0\n";
     $headers .= "Content-Type: multipart/alternative;\n\tboundary=\"$mail_boundary\"\n";
     $headers .= "X-Mailer: PHP " . phpversion();
     $activate_link = "https://bibliontech.it/activate_account/?email=".$emailX."&code=".$codeX;
-     
+
     // Corpi del messaggio nei due formati testo e HTML
     $text_msg = "messaggio in formato testo";
     $html_msg = "<b>messaggio</b> in formato <p><a href='http://www.aruba.it'>html</a><br><img src=\"http://hosting.aruba.it/image_top/top_01.gif\" border=\"0\"></p>";
-     
+
     // Costruisci il corpo del messaggio da inviare
     $msg = "This is a multi-part message in MIME format.\n\n";
     $msg .= "--$mail_boundary\n";
     $msg .= "Content-Type: text/plain; charset=\"iso-8859-1\"\n";
     $msg .= "Content-Transfer-Encoding: 8bit\n\n";
     $msg .= "Benvenuto in BiblionTech! Clicca sul seguente link per attivare il tuo account: ".$activate_link;  // aggiungi il messaggio in formato text
-     
+
     $msg .= "\n--$mail_boundary\n";
     $msg .= "Content-Type: text/html; charset=\"iso-8859-1\"\n";
     $msg .= "Content-Transfer-Encoding: 8bit\n\n";
-    
-    
-    
-    
+
+
+
+
     $msg .= '<section style="margin-top: 100px;
             margin-bottom: 50px;
             display: flex;
@@ -426,29 +426,29 @@ function sendMail($emailX,$codeX,$usernameX) {
             
             
             </section>';
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
+
+
+
+
+
+
+
+
+
+
     //$msg .= "<h2>Benvenuto in BiblionTech!</h2> <p>Clicca sul seguente link per attivare il tuo account: <a href='".$activate_link."'>$activate_link</a></p>";  // aggiungi il messaggio in formato HTML
-     
+
     // Boundary di terminazione multipart/alternative
     $msg .= "\n--$mail_boundary--\n";
-     
+
     // Imposta il Return-Path (funziona solo su hosting Windows)
     ini_set("sendmail_from", $sender);
-     
+
     // Invia il messaggio, il quinto parametro "-f$sender" imposta il Return-Path su hosting Linux
-    if (mail($to, $subject, $msg, $headers, "-f$sender")) { 
+    if (mail($to, $subject, $msg, $headers, "-f$sender")) {
         echo "Mail inviata correttamente!<br><br>Questo di seguito è il codice sorgente usato per l'invio della mail:<br><br>";
         return true;
-    } else { 
+    } else {
         echo "<br><br>Recapito e-Mail fallito!";
         return false;
     }

@@ -1,4 +1,4 @@
-<?php 
+<?php
 require_once('../includes/functions.php');
 
 ?>
@@ -197,8 +197,8 @@ require_once('../includes/functions.php');
     <script src="../assets/js/sell.js"></script>
     <script src="../assets/js/typewriter.js"></script>
     <script src="../assets/js/historyReplace.js"></script>
-    <?php 
-    
+    <?php
+
     if (isset($_GET['error'])) {
         echo "<script>document.getElementById('error').style.display = 'block';</script>";
     }
@@ -240,7 +240,7 @@ require_once('../includes/functions.php');
         }
         echo "</script>";
     }
-    
+
     ?>
 </body>
 
