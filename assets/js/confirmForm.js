@@ -15,7 +15,7 @@ function regConfirm() {
 
 	//check sul nome
 	element = document.getElementById("name-reg");
-	pattern = pattern = /^([a-zA-Z\xE0\xE8\xE9\xF9\xF2\xEC\x27]\s?)+$/;
+	pattern = pattern = /^([a-zA-Z\xE0\xE8\xE9\xF9\xF2\xEC\x27]\s?)+$/u;
 	if (!nameReg) {
 		document.getElementById("name-reg").value = "";
 	} else {
@@ -28,7 +28,7 @@ function regConfirm() {
 
 	//check sul cognome
 	element = document.getElementById("cognome-reg");
-	pattern = pattern = /^([a-zA-Z\xE0\xE8\xE9\xF9\xF2\xEC\x27]\s?)+$/;
+	pattern = pattern = /^([a-zA-Z\xE0\xE8\xE9\xF9\xF2\xEC\x27]\s?)+$/u;
 	if (!cognomeReg) {
 		document.getElementById("cognome-reg").value = "";
 	} else {

@@ -91,7 +91,7 @@ function regSubmit() {
 
 	//check password
 	element = document.getElementById("password-reg");
-	pattern = /^[a-zA-Z0-9\_\*\-\+\!\?\,\:\;\.\xE0\xE8\xE9\xF9\xF2\xEC\x27]{8,20}/;
+	pattern = /^[a-zA-Z0-9\_\*\-\+\!\?\,\:\;\.\xE0\xE8\xE9\xF9\xF2\xEC\x27]{8,20}/u;
 	if (!passwordReg || !checkPatternChars(element, passwordReg, pattern)) {
 		element.classList.add("is-invalid");
 		element.classList.add("border-red");

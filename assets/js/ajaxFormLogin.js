@@ -30,7 +30,7 @@ $(document).ready(function() {
 
     $("#password-reg").keyup(function() {
         var input = $(this).val();
-        pattern = /^[a-zA-Z0-9\_\*\-\+\!\?\,\:\;\.\xE0\xE8\xE9\xF9\xF2\xEC\x27]{8,20}/;
+        pattern = /^[a-zA-Z0-9\_\*\-\+\!\?\,\:\;\.\xE0\xE8\xE9\xF9\xF2\xEC\x27]{8,20}/u;
         if (!pattern.test(input)) {
             $("#password-reg").removeClass("is-valid");
             $("#password-reg").addClass("is-invalid");
@@ -44,7 +44,7 @@ $(document).ready(function() {
 
     $("#password-reg1").keyup(function() {
         var input = $(this).val();
-        pattern = /^[a-zA-Z0-9\_\*\-\+\!\?\,\:\;\.\xE0\xE8\xE9\xF9\xF2\xEC\x27]{8,20}/;
+        pattern = /^[a-zA-Z0-9\_\*\-\+\!\?\,\:\;\.\xE0\xE8\xE9\xF9\xF2\xEC\x27]{8,20}/u;
         if (!pattern.test(input)) {
             $("#password-reg1").removeClass("is-valid");
             $("#password-reg1").addClass("is-invalid");
